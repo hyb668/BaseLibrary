@@ -1,0 +1,5 @@
+rootProject.name = 'baselibrary-root'
+
+include ':util'
+include ':common'
+include ':sample'

@@ -1,0 +1,26 @@
+ext { // 配置全局变量
+    minSdkVersion = 9
+    compileSdkVersion = 24
+    buildToolsVersion = '24.0.1'
+    sourceCompatibility = JavaVersion.VERSION_1_7
+}
+
+
+buildscript { //指定gradle plugin下载仓库
+    repositories {
+        jcenter() //默认仓库
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.2' //gradle plugin
+    }
+}
+
+allprojects {// 指定所有工程的依赖解析仓库
+    repositories {
+        jcenter() //默认仓库
+    }
+}
+
+task clean(type: Delete) { // 自定义clean的Delete类型task
+    delete rootProject.buildDir //删除根工程下的build目录
+}
