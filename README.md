@@ -22,7 +22,9 @@ Android基本库，现在分为common和util两个module,主要包含`adapter`�
 To build:
 
 ```bash
-# todo: share到git 以后补充
+$ git clone git@github.com:GosuncnMobile/BaseLibrary.git
+$ cd BaseLibrary/
+$ ./gradlew build
 ```
 
 # Sample Usage
@@ -58,5 +60,5 @@ project中有样例演示，可以在 `sample/` 文件夹找到.
     limitations under the License.
 
 
- [issues]: 稍后补充
+ [issues]:https://github.com/GosuncnMobile/BaseLibrary/issues
 
