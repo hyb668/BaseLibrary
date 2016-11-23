@@ -1,39 +1,111 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+def cfg = rootProject.ext.configuration
+def lib = rootProject.ext.libraries
+def test = rootProject.ext.testLibraries
+
+//APK名称中的时间
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC+8"))
+}
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
+
     defaultConfig {
-        applicationId "com.gosuncn.sample"
-        minSdkVersion 9
-        targetSdkVersion 25
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-            cmake {
-                cppFlags "-frtti -fexceptions"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes { // 构建类型，release/debug
+        release {
+            // 压缩对齐优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            // 是否混淆
+            minifyEnabled true
+            // 混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            //指定输出文件名称
+            applicationVariants.all { variant -> //buildTypes和productFlavors的组合为variant,能生成types*flavors*dimensions个apk
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "baselibrary_sample_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
             }
         }
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        debug {
+            applicationIdSuffix '.debug'  // apk以applicationID区分，允许一个设备安装多类型的apk
+            versionNameSuffix '-debug' // 版本名
         }
     }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
+
+    productFlavors{ //产品版本
+        //注意顺序，后面的dimension资源会覆盖前面的
+        flavorDimensions 'client', 'price' // 不同flavor有相同规范，如不同client都有付费和免费版
+
+        alpha{//产品名，不能使用build type名称和预定义名称androidTest
+            dimension 'client'  // 声明属于哪种规范的版本
+            applicationId 'com.tong.mybaselibrary.alpha' // 支持一个设备安装多个不同版本产品
         }
+
+        beta{
+            dimension 'client'
+            applicationId 'com.tong.mybaselibrary.beta'
+        }
+
+        pay{
+            dimension 'price'
+        }
+
+        free{
+            dimension 'price'
+        }
+    }
+
+    // 屏蔽lint的严格检查
+    lintOptions {
+        abortOnError false
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    testCompile 'junit:junit:4.12'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //unit test
+    testCompile "junit:junit:${test.junit}"
+    //ui test
+    androidTestCompile "com.android.support.test:runner:${test.runner}"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:${test.espresso}"
+    //support
+    compile "com.android.support:appcompat-v7:${lib.supportVersion}"
+    compile "com.android.support:design:${lib.supportVersion}"
+    //dagger2
+    compile "com.google.dagger:dagger:${lib.dagger}"
+    annotationProcessor  "com.google.dagger:dagger-compiler:${lib.dagger}"
+    //rxJava
+    compile "io.reactivex:rxjava:${lib.rxJava}"
+    //rxAndroid
+    compile "io.reactivex:rxandroid:${lib.rxAndroid}"
+    //retrofit2
+    compile "com.squareup.retrofit2:converter-gson:${lib.retrofit2}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${lib.retrofit2}"
+    compile "com.squareup.retrofit2:retrofit:${lib.retrofit2}"
+
+    compile project(':util'); //添加Android Library
+    compile project(':common');
 }

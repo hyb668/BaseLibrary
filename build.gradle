@@ -1,23 +1,47 @@
 ext { // 配置全局变量
-    minSdkVersion = 9
-    compileSdkVersion = 24
-    buildToolsVersion = '24.0.1'
-    sourceCompatibility = JavaVersion.VERSION_1_7
+
+    configuration = [
+            compileSdkVersion : 25,
+            buildToolsVersion : '25.0.0',
+            minSdkVersion     : 9,
+            targetSdkVersion  : 25,
+            javaCompatibility : JavaVersion.VERSION_1_7
+    ]
+
+    libraries = [
+            supportVersion : '25.0.1',
+            okHttp         : '3.4.2',
+            retrofit2      : '2.1.0',
+            rxJava         : '1.2.2',
+            rxAndroid      : '1.2.1',
+            dagger         : '2.7',
+    ]
+
+    testLibraries = [
+            junit    : '4.12',
+            runner   : '0.5',
+            espresso : '2.2.2'
+    ]
 }
 
 
 buildscript { //指定gradle plugin下载仓库
     repositories {
         jcenter() //默认仓库
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2' //gradle plugin
+        classpath 'me.tatarka:gradle-retrolambda:3.4.0'
     }
 }
 
 allprojects {// 指定所有工程的依赖解析仓库
     repositories {
         jcenter() //默认仓库
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-annotations:25.0.1' //统一依赖
     }
 }
 
