@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gosuncn.core.common.adapter;
+package com.gosuncn.core.ui.adapter;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +19,6 @@ import android.view.View;
 
 /**
  * 添加点击事件的RecyclerViewAdapter
- * Created by Tong on 2016/9/29.
  */
 
 public abstract class BaseRecyclerViewAdapter<V extends BaseRecyclerViewAdapter.ViewHolder> extends RecyclerView.Adapter<V> {

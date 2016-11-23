@@ -1,4 +1,4 @@
-package com.gosuncn.sample.common.config;
+package com.gosuncn.sample.common;
 
 /**
  * @author Tong

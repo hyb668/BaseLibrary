@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gosuncn.core.common.widget;
+package com.gosuncn.core.ui.widget;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -20,9 +20,7 @@ import android.view.MotionEvent;
 
 /**
  *  禁止滑动的ViewPager
- * Created by Tong on 2016/10/18.
  */
-
 public class DisableScrollViewPager extends ViewPager {
 
     private boolean scrollable = false;

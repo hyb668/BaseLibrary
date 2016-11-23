@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'// 应用Android plugin
+
+def cfg = rootProject.ext.configuration
+def lib = rootProject.ext.libraries
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+    buildToolsVersion cfg.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    compileOptions {
+        sourceCompatibility cfg.javaCompatibility //源码兼容版本
+        targetCompatibility cfg.javaCompatibility //编译兼容版本
+    }
+}
+
+dependencies {
+    //support
+    compile "com.android.support:appcompat-v7:${lib.supportVersion}"
+    compile "com.android.support:design:${lib.supportVersion}"
+}

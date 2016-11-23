@@ -2,4 +2,5 @@ rootProject.name = 'baselibrary-root'
 
 include ':util'
 include ':common'
+include ':ui'
 include ':sample'

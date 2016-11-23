@@ -108,4 +108,6 @@ dependencies {
 
     compile project(':util'); //添加Android Library
     compile project(':common');
+    compile project(':ui');
+
 }

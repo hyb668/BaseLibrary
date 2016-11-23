@@ -1,9 +1,4 @@
-package com.gosuncn.sample.common.bases;
-/**
- * @author Tong
- * @time 2016/11/22
- * @apiNote
- */
+package com.gosuncn.sample.common;
 
 import android.app.Application;
 import android.content.Context;

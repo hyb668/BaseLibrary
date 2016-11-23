@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".module.main.activity.MainActivity">
 
-    <com.gosuncn.core.common.widget.DisableScrollViewPager
+    <com.gosuncn.core.ui.widget.DisableScrollViewPager
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"

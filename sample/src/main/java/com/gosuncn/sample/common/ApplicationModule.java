@@ -1,16 +1,10 @@
-package com.gosuncn.sample.common.bases;
-/**
- * @author Tong
- * @time 2016/11/22
- * @apiNote
- */
+package com.gosuncn.sample.common;
 
 import android.app.Application;
 
 import com.gosuncn.core.common.logger.okHttpLog.HttpLoggingInterceptorM;
 import com.gosuncn.core.common.logger.okHttpLog.LogInterceptor;
 import com.gosuncn.core.common.util.UrlInterceptor;
-import com.gosuncn.sample.common.config.Config;
 
 import java.util.concurrent.TimeUnit;
 

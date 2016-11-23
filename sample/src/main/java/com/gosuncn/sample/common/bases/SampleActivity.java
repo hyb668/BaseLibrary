@@ -1,12 +1,10 @@
 package com.gosuncn.sample.common.bases;
-/**
- * @author Tong
- * @time 2016/11/22
- * @apiNote
- */
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.gosuncn.sample.common.ApplicationComponent;
+import com.gosuncn.sample.common.SampleApplication;
 
 public abstract class SampleActivity extends AppCompatActivity {
 

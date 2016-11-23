@@ -2,7 +2,7 @@
 
 #### 目标：write once,use anywhere
 
-Android基本库，现在分为common和util两个module,主要包含`adapter`、`base`、`event`、`listener`，`logger`，`util`，`widget`，这个基本库集合了一般Android项目所需的公共类，可直接导入使用，加快项目开发。
+Android基本库，现在分为common、util和ui,主要包含`adapter`、`base`、`event`、`listener`，`logger`，`util`，`widget`，这个基本库集合了一般Android项目所需的公共类，可直接导入使用，加快项目开发。
 
 ## Communication
 
@@ -39,7 +39,19 @@ project中有样例演示，可以在 `sample/` 文件夹找到.
 
 ## Common
 
-包含公共的其他类和需要依赖第三方库的工具类
+包含需要依赖第三方库的工具类
+
+## Ui
+
+包含自定义的ui组件
+
+# Plugins
+
+提供自动生成插件，可以在`plugins/` 文件夹找到.
+
+## DaggerHelper
+
+用于自动生成Dagger Component和Module以及一些目录
 
 ## Bugs and Feedback
 

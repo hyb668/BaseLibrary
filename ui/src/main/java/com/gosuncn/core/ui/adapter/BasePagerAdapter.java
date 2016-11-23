@@ -11,16 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gosuncn.core.common.adapter;
+package com.gosuncn.core.ui.adapter;
 
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-/**
- * Created by Tong on 2016/9/26.
- */
 
 public class BasePagerAdapter extends FragmentStatePagerAdapter {
 

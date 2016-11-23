@@ -1,6 +1,6 @@
 package com.gosuncn.sample.module.main;
 
-import com.gosuncn.sample.common.bases.ApplicationComponent;
+import com.gosuncn.sample.common.ApplicationComponent;
 import com.gosuncn.sample.common.bases.PageComponent;
 import com.gosuncn.sample.common.bases.PageModule;
 import com.gosuncn.sample.common.bases.PerPage;

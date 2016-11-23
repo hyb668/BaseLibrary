@@ -1,4 +1,4 @@
-package com.gosuncn.sample.common.bases;
+package com.gosuncn.sample.common;
 
 import android.app.Application;
 
