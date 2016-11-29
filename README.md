@@ -11,6 +11,10 @@ Android基本库，现在分为common、util和ui,主要包含`adapter`、`base`
 
 # Binaries
 
+* Common:[ ![Download](https://api.bintray.com/packages/wangtotang/maven/common/images/download.svg) ](https://bintray.com/wangtotang/maven/common/_latestVersion)
+*   Util:  [ ![Download](https://api.bintray.com/packages/wangtotang/maven/util/images/download.svg) ](https://bintray.com/wangtotang/maven/util/_latestVersion)
+*     UI:[ ![Download](https://api.bintray.com/packages/wangtotang/maven/ui/images/download.svg) ](https://bintray.com/wangtotang/maven/ui/_latestVersion)
+
 ```groovy
 dependencies {
     compile "com.gosuncn.core:common:${latest_version}"
