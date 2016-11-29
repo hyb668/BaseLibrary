@@ -7,8 +7,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Main  start -->
         <activity android:name=".module.main.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +17,60 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".module.main.activity.UIActivity"
+            android:label="@string/ui" />
+        <!-- Main  end -->
+
+
+        <!-- UI  start -->
+        <activity
+            android:name=".module.ui.activity.WidgetActivity"
+            android:label="@string/widget" />
+        <activity
+            android:name=".module.ui.activity.ViewActivity"
+            android:label="@string/view" />
+
+        <!-- Widget  start -->
+        <activity
+            android:name=".module.ui.activity.CircleImageViewActivity"
+            android:label="@string/circle_image_view" />
+        <activity
+            android:name=".module.ui.activity.CustomToolbarActivity"
+            android:label="@string/custom_toolbar" />
+        <activity
+            android:name=".module.ui.activity.RecyclerViewDividerActivity"
+            android:label="@string/recycler_view_divider" />
+        <activity
+            android:name=".module.ui.activity.RecyclerViewGridSpaceActivity"
+            android:label="@string/recycler_view_grid_space" />
+        <activity
+            android:name=".module.ui.activity.RecyclerViewLinearSpaceActivity"
+            android:label="@string/recycler_view_linear_space" />
+        <activity
+            android:name=".module.ui.activity.ResizeDrawableCheckBoxActivity"
+            android:label="@string/resize_drawable_checkbox" />
+        <activity
+            android:name=".module.ui.activity.ResizeDrawableEditTextActivity"
+            android:label="@string/resize_drawable_edit_text" />
+        <!-- Widget end -->
+
+
+        <!-- View start -->
+        <activity
+            android:name=".module.ui.activity.BlurFrameLayoutActivity"
+            android:label="@string/blur_frame_layout" />
+        <activity
+            android:name=".module.ui.activity.DisableScrollViewPagerActivity"
+            android:label="@string/disable_scroll_viewpager" />
+        <activity
+            android:name=".module.ui.activity.SquareLayoutActivity"
+            android:label="@string/square_layout"/>
+        <!-- View end -->
+
+
+        <!-- UI  end -->
+
     </application>
 
 </manifest>

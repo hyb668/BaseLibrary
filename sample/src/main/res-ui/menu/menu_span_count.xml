@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:visible="true"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_count_2"
+            android:title="span count: 2" />
+        <item
+            android:id="@+id/action_count_3"
+            android:title="span count: 3" />
+    </group>
+</menu>

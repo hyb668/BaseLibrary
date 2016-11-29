@@ -1,16 +1,30 @@
 package com.gosuncn.sample.module.main.activity;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
 import com.gosuncn.sample.R;
+import com.gosuncn.sample.common.SampleApplication;
+import com.gosuncn.sample.module.main.adapter.AnAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AnActivity {
+
+    private final String UI = SampleApplication.getAppContext().getResources().getString(R.string.ui);
+    private final String COMMON = SampleApplication.getAppContext().getResources().getString(R.string.common);
+    private final String UTIL = SampleApplication.getAppContext().getResources().getString(R.string.util);
+    private String[] itemTitle = new String[]{UI,COMMON,UTIL};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initViews() {
+        super.initViews();
+        //添加Adapter和Listener
+        AnAdapter adapter = new AnAdapter(itemTitle);
+        rv.setAdapter(adapter);
+        adapter.setOnItemClickListener((v, position) -> {
+            switch (position){
+                case 0:
+                    gotoActivity(UIActivity.class);
+                    break;
+            }
+        });
     }
+
 
 }

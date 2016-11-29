@@ -1,12 +1,12 @@
 package com.gosuncn.sample.common.bases;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
+import com.gosuncn.core.common.bases.BaseFragment;
 import com.gosuncn.sample.common.ApplicationComponent;
 import com.gosuncn.sample.common.SampleApplication;
 
-public abstract class SampleFragment extends Fragment {
+public abstract class SampleFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

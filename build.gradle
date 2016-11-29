@@ -3,7 +3,7 @@ ext { // 配置全局变量
     configuration = [
             compileSdkVersion : 25,
             buildToolsVersion : '25.0.0',
-            minSdkVersion     : 9,
+            minSdkVersion     : 11,
             targetSdkVersion  : 25,
             javaCompatibility : JavaVersion.VERSION_1_7
     ]
@@ -15,6 +15,8 @@ ext { // 配置全局变量
             rxJava         : '1.2.2',
             rxAndroid      : '1.2.1',
             dagger         : '2.7',
+            glide          : '3.7.0',
+            butterKnife    : '8.4.0'
     ]
 
     testLibraries = [
@@ -33,6 +35,8 @@ buildscript { //指定gradle plugin下载仓库
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2' //gradle plugin
         classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
@@ -40,8 +44,9 @@ allprojects {// 指定所有工程的依赖解析仓库
     repositories {
         jcenter() //默认仓库
     }
-    configurations.all {
-        resolutionStrategy.force 'com.android.support:support-annotations:25.0.1' //统一依赖
+    configurations.all { //统一依赖
+        resolutionStrategy.force "com.android.support:support-annotations:${libraries.supportVersion}",
+                                 "com.android.support:support-v4:${libraries.supportVersion}"
     }
 }
 

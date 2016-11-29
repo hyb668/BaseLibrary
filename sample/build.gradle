@@ -14,6 +14,12 @@ android {
     compileSdkVersion cfg.compileSdkVersion
     buildToolsVersion cfg.buildToolsVersion
 
+    sourceSets {
+        main {
+            res.srcDirs += ['src/main/res-ui']
+        }
+    }
+
     defaultConfig {
         minSdkVersion cfg.minSdkVersion
         targetSdkVersion cfg.targetSdkVersion
@@ -55,25 +61,25 @@ android {
         }
     }
 
-    productFlavors{ //产品版本
+    productFlavors { //产品版本
         //注意顺序，后面的dimension资源会覆盖前面的
         flavorDimensions 'client', 'price' // 不同flavor有相同规范，如不同client都有付费和免费版
 
-        alpha{//产品名，不能使用build type名称和预定义名称androidTest
+        alpha {//产品名，不能使用build type名称和预定义名称androidTest
             dimension 'client'  // 声明属于哪种规范的版本
             applicationId 'com.tong.mybaselibrary.alpha' // 支持一个设备安装多个不同版本产品
         }
 
-        beta{
+        beta {
             dimension 'client'
             applicationId 'com.tong.mybaselibrary.beta'
         }
 
-        pay{
+        pay {
             dimension 'price'
         }
 
-        free{
+        free {
             dimension 'price'
         }
     }
@@ -94,9 +100,11 @@ dependencies {
     //support
     compile "com.android.support:appcompat-v7:${lib.supportVersion}"
     compile "com.android.support:design:${lib.supportVersion}"
+    compile "com.android.support:cardview-v7:${lib.supportVersion}"
+    compile "com.android.support:recyclerview-v7:${lib.supportVersion}"
     //dagger2
     compile "com.google.dagger:dagger:${lib.dagger}"
-    annotationProcessor  "com.google.dagger:dagger-compiler:${lib.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${lib.dagger}"
     //rxJava
     compile "io.reactivex:rxjava:${lib.rxJava}"
     //rxAndroid
@@ -105,6 +113,9 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:${lib.retrofit2}"
     compile "com.squareup.retrofit2:adapter-rxjava:${lib.retrofit2}"
     compile "com.squareup.retrofit2:retrofit:${lib.retrofit2}"
+    //butterKnife
+    compile "com.jakewharton:butterknife:${lib.butterKnife}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${lib.butterKnife}"
 
     compile project(':util'); //添加Android Library
     compile project(':common');

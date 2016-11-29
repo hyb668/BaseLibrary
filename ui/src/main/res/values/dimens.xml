@@ -28,8 +28,7 @@
     <dimen name="dense_size_headline">24sp</dimen>
     <dimen name="dense_size_title">21sp</dimen>
     <dimen name="dense_size_subheading">17sp</dimen>
-    <dimen name="dense_size_body_2">15sp</dimen>
-    <dimen name="dense_size_body_1">15sp</dimen>
+    <dimen name="dense_size_body">15sp</dimen>
     <dimen name="dense_size_caption">13sp</dimen>
     <dimen name="dense_size_button">15sp</dimen>
 

@@ -12,7 +12,11 @@ Android基本库，现在分为common、util和ui,主要包含`adapter`、`base`
 # Binaries
 
 ```groovy
- // todo: gradle dependence 以后补充
+dependencies {
+    compile "com.gosuncn.core:common:${latest_version}"
+    compile "com.gosuncn.core:util:${latest_version}"
+    compile "com.gosuncn.core:ui:${latest_version}"
+}
 ```
 
 # Document

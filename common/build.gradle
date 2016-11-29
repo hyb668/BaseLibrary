@@ -7,6 +7,9 @@ android {
     compileSdkVersion cfg.compileSdkVersion
     buildToolsVersion cfg.buildToolsVersion
 
+    dataBinding{
+        enabled=true
+    }
     defaultConfig {
         minSdkVersion cfg.minSdkVersion
         targetSdkVersion cfg.targetSdkVersion
@@ -26,4 +29,39 @@ dependencies {
     compile "com.android.support:support-annotations:${lib.supportVersion}"
     compile "com.android.support:appcompat-v7:${lib.supportVersion}"
     compile "com.android.support:design:${lib.supportVersion}"
+    //glide
+    compile "com.github.bumptech.glide:glide:${lib.glide}"
+    //rxJava
+    compile "io.reactivex:rxjava:${lib.rxJava}"
+}
+
+// Create source/javadoc artifacts for publishing
+apply from: "$rootDir/gradle/artifacts.gradle"
+
+version = "1.0.0"
+
+// Configure android-maven-gradle-plugin
+install {
+    repositories.mavenInstaller.pom.project {
+        name 'common'
+        description 'common'
+        packaging POM_PACKAGING
+        url POM_URL
+    }
+}
+
+// Configure gradle-bintray-plugin (for publishing releases)
+bintray {
+    configurations = ['archives']
+
+    publish = true
+
+    pkg {
+        repo = 'maven'
+        name = 'common'
+        licenses = ['Apache-2.0']
+        websiteUrl = POM_URL
+        issueTrackerUrl = POM_ISSUE_URL
+        vcsUrl = POM_VCS_URL
+    }
 }

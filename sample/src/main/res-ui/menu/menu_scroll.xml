@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:visible="true">
+        <item
+            android:id="@+id/action_scrollable"
+            android:title="Scrollable"
+            android:checkable="true"/>
+        <item
+            android:id="@+id/action_smooth_scroll"
+            android:title="SmoothScroll"
+            android:checkable="true"/>
+    </group>
+</menu>

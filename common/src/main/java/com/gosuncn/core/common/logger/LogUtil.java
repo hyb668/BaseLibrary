@@ -72,6 +72,10 @@ public class LogUtil {
         mGlobalTag = tag;
     }
 
+    public static boolean isDebug(){
+        return IS_SHOW_LOG;
+    }
+
     public static void v() {
         printLog(V, null, DEFAULT_MESSAGE);
     }

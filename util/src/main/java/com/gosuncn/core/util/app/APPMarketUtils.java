@@ -71,9 +71,7 @@ public class APPMarketUtils {
      * @return
      */
     public static boolean judge(Context paramContext, Intent paramIntent) {
-        List<ResolveInfo> localList = paramContext.getPackageManager()
-                .queryIntentActivities(paramIntent,
-                        PackageManager.GET_INTENT_FILTERS);
+        List<ResolveInfo> localList = paramContext.getPackageManager().queryIntentActivities(paramIntent, PackageManager.GET_INTENT_FILTERS);
         if ((localList != null) && (localList.size() > 0)) {
             return true;
         } else {

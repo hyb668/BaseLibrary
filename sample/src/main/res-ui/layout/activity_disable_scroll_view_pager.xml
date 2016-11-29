@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.gosuncn.sample.module.ui.activity.DisableScrollViewPagerActivity">
+
+    <com.gosuncn.core.ui.view.DisableScrollViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="2px"/>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl"
+            app:tabIndicatorHeight="0dp"
+            app:tabTextColor="@color/color_material_green_600"
+            app:tabSelectedTextColor="@color/colorAccent"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_48"
+            style="@style/TabItem" />
+
+    </LinearLayout>
+
+</LinearLayout>

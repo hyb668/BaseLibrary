@@ -1,15 +1,21 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="android:listDivider">@color/colorAccent</item>
     </style>
 
     <style name="TabItem">
-        <item name="tabBackground">@android:color/white</item>
+        <item name="tabBackground">?attr/background</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:textSize">@dimen/dense_size_display_1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_material_green_600</item>
     </style>
 
 </resources>

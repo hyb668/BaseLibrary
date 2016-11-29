@@ -20,7 +20,7 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 
-import com.gosuncn.core.util.math.MathUtils;
+import com.gosuncn.core.util.format.MathUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

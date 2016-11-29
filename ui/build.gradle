@@ -24,3 +24,34 @@ dependencies {
     compile "com.android.support:appcompat-v7:${lib.supportVersion}"
     compile "com.android.support:design:${lib.supportVersion}"
 }
+
+// Create source/javadoc artifacts for publishing
+apply from: "$rootDir/gradle/artifacts.gradle"
+
+version = "1.0.0"
+
+// Configure android-maven-gradle-plugin
+install {
+    repositories.mavenInstaller.pom.project {
+        name 'ui'
+        description 'ui'
+        packaging POM_PACKAGING
+        url POM_URL
+    }
+}
+
+// Configure gradle-bintray-plugin (for publishing releases)
+bintray {
+    configurations = ['archives']
+
+    publish = true
+
+    pkg {
+        repo = 'maven'
+        name = 'ui'
+        licenses = ['Apache-2.0']
+        websiteUrl = POM_URL
+        issueTrackerUrl = POM_ISSUE_URL
+        vcsUrl = POM_VCS_URL
+    }
+}

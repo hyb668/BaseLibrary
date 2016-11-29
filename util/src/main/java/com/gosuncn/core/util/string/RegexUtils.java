@@ -162,4 +162,22 @@ public class RegexUtils {
         return Pattern.matches(regex, text);
     }
 
+    /**
+     * 判断是否为 port
+     * @param port IP端口
+     * @return 验证成功返回true，验证失败返回false
+     */
+    public static boolean checkIpPort(String port) {
+        int iPort = 0;
+        try {
+            iPort = Integer.parseInt(port);
+        } catch (Exception e) {
+            iPort = 0;
+        }
+        if (iPort == 0 || iPort > 65535) {
+            return false;
+        }
+        return true;
+    }
+
 }

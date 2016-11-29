@@ -1,3 +1,35 @@
 <resources>
+
     <string name="app_name">BaseLibrary</string>
+
+    <!--main页面-->
+    <string name="ui">UI</string>
+    <string name="common">Common</string>
+    <string name="util">Util</string>
+    <string name="widget">Widget</string>
+    <string name="view">View</string>
+    <string name="adapter">Adapter</string>
+    <string name="listener">Listener</string>
+
+    <!--ui页面 start-->
+
+    <!--  Widget -->
+    <string name="circle_image_view">CircleImageView</string>
+    <string name="custom_toolbar">CustomToolbar</string>
+    <string name="recycler_view_divider">RecyclerViewDivider</string>
+    <string name="recycler_view_grid_space">RecyclerViewGridSpace</string>
+    <string name="recycler_view_linear_space">RecyclerViewLinearSpace</string>
+    <string name="resize_drawable_checkbox">ResizeDrawableCheckBox</string>
+    <string name="resize_drawable_edit_text">ResizeDrawableEditText</string>
+
+    <!--  View -->
+    <string name="blur_frame_layout">BlurFrameLayout</string>
+    <string name="disable_scroll_viewpager">DisableScrollViewPager</string>
+    <string name="square_layout">SquareLayout</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--ui页面 end-->
+
 </resources>

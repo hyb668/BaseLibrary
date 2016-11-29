@@ -1,12 +1,16 @@
 package com.gosuncn.core.util.app;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.text.TextUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +87,6 @@ public class AppUtils {
             }
 
         } catch (NameNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return defaultCode;
         }
@@ -144,6 +147,39 @@ public class AppUtils {
         } else {
             return false;
         }
+    }
+
+    /**
+     * 判断是否安装目标应用
+     * @param packageName 目标应用安装后的包名
+     * @return 是否已安装目标应用
+     */
+    public  static boolean isInstallByread(String packageName) {
+        return new File("/data/data/" + packageName).exists();
+    }
+
+
+    /**
+     * 判断某个界面是否在前台</br>
+     * 需要权限：android.permission.GET_TASKS
+     * @param context
+     * @param className
+     *            某个界面名称
+     */
+    public static boolean isForeground(Context context, String className) {
+        if (context == null || TextUtils.isEmpty(className)) {
+            return false;
+        }
+
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
+        if (list != null && list.size() > 0) {
+            ComponentName cpn = list.get(0).topActivity;
+            if (className.equals(cpn.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

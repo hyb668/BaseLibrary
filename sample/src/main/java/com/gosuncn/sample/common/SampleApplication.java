@@ -3,6 +3,9 @@ package com.gosuncn.sample.common;
 import android.app.Application;
 import android.content.Context;
 
+import com.gosuncn.core.common.logger.LogUtil;
+import com.gosuncn.sample.BuildConfig;
+
 
 public class SampleApplication extends Application {
 
@@ -16,6 +19,7 @@ public class SampleApplication extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .build();
         context = appComponent.application();
+        LogUtil.init(BuildConfig.DEBUG);
     }
 
     public ApplicationComponent component() {
