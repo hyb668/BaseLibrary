@@ -1,6 +1,5 @@
 # BaseLibrary Releases #
 
-<<<<<<< HEAD
 ### Util 1.1.1 - November 29th 2016 ###
 
 * New: add PreferencesHelper.
@@ -8,10 +7,6 @@
 
 ### Version 1.0.0 - November 29th 2016 ###
 
-=======
-### Version 1.0.0 - November 29th 2016 ###
-
->>>>>>> 13753c174e35ccb45c29ae27b6a74118219288a7
 * New: add ui module and some sample classes.
 * Fix: see todo item,later will do that
 
