@@ -174,10 +174,7 @@ public class RegexUtils {
         } catch (Exception e) {
             iPort = 0;
         }
-        if (iPort == 0 || iPort > 65535) {
-            return false;
-        }
-        return true;
+        return !(iPort == 0 || iPort > 65535);
     }
 
 }

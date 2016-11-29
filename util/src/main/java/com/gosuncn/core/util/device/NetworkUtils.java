@@ -14,6 +14,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -22,6 +23,9 @@ import android.webkit.CookieSyncManager;
 
 import java.lang.reflect.Method;
 import java.util.List;
+
+import static android.Manifest.permission.ACCESS_WIFI_STATE;
+import static android.Manifest.permission.CHANGE_WIFI_STATE;
 
 /**
  * 网络相关的工具类
@@ -82,10 +86,9 @@ public class NetworkUtils {
      */
     public static boolean hasInternetPermission(Context context) {
         if (context != null) {
-            return context
-                    .checkCallingOrSelfPermission("android.permission.INTERNET") == PackageManager. PERMISSION_GRANTED;
+            return context.checkCallingOrSelfPermission("android.permission.INTERNET") == PackageManager. PERMISSION_GRANTED;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -130,12 +133,7 @@ public class NetworkUtils {
         if (context != null) {
             NetworkInfo info = getActiveNetworkInfo(context);
 
-            if (info == null) {
-                return false;
-            }
-
-            return (info != null) && (info.getType() == 0)
-                    && (info.isConnected());
+            return info != null&&info.getType() == 0 && info.isConnected();
         }
 
         return false;
@@ -252,6 +250,7 @@ public class NetworkUtils {
      * @param context
      * @return
      */
+    @RequiresPermission(ACCESS_WIFI_STATE)
     public static int getWifiState(Context context) {
         WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
@@ -277,6 +276,7 @@ public class NetworkUtils {
      * @param password
      * @return
      */
+    @RequiresPermission(allOf = {ACCESS_WIFI_STATE,CHANGE_WIFI_STATE})
     public static boolean wifiConnection(Context context, String wifiSSID,
                                          String password) {
         boolean isConnection = false;
@@ -377,9 +377,7 @@ public class NetworkUtils {
 
             Method method = ownerClass.getMethod("getMobileDataEnabled", argsClass);
 
-            Boolean isOpen = (Boolean) method.invoke(mConnectivityManager, arg);
-
-            return isOpen;
+            return (Boolean) method.invoke(mConnectivityManager, arg);
 
         } catch (Exception e) {
 

@@ -19,9 +19,8 @@ public class CleanCacheUtils {
      * @return
      */
     public String getDiskCacheDir(Context context) {
-        String cachePath = null;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable()) {
+        String cachePath;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Environment.isExternalStorageRemovable()) {
             cachePath = context.getExternalCacheDir().getPath();
         } else {
             cachePath = context.getCacheDir().getPath();
@@ -43,9 +42,8 @@ public class CleanCacheUtils {
      *
      * @param context
      */
-    public static void cleanDatabases(Context context) {
-        deleteFilesByDirectory(new File("/data/data/"
-                + context.getPackageName() + "/databases"));
+    public static boolean cleanDatabases(Context context) {
+        return deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/databases"));
     }
 
     /**
@@ -53,9 +51,8 @@ public class CleanCacheUtils {
      *
      * @param context
      */
-    public static void cleanSharedPreference(Context context) {
-        deleteFilesByDirectory(new File("/data/data/"
-                + context.getPackageName() + "/shared_prefs"));
+    public static boolean cleanSharedPreference(Context context) {
+        return deleteFilesByDirectory(new File("/data/data/" + context.getPackageName() + "/shared_prefs"));
     }
 
     /**
@@ -83,8 +80,7 @@ public class CleanCacheUtils {
      * @param context
      */
     public static void cleanExternalCache(Context context) {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             deleteFilesByDirectory(context.getExternalCacheDir());
         }
     }
@@ -123,12 +119,13 @@ public class CleanCacheUtils {
      *
      * @param directory
      */
-    private static void deleteFilesByDirectory(File directory) {
+    private static boolean deleteFilesByDirectory(File directory) {
         if (directory != null && directory.exists() && directory.isDirectory()) {
             for (File item : directory.listFiles()) {
-                item.delete();
+                return item.delete();
             }
         }
+        return false;
     }
 
     /**
@@ -139,9 +136,8 @@ public class CleanCacheUtils {
      *
      * @param file
      * @return
-     * @throws Exception
      */
-    public static long getFolderSize(File file) throws Exception {
+    public static long getFolderSize(File file) {
         long size = 0;
         try {
             File[] fileList = file.listFiles();

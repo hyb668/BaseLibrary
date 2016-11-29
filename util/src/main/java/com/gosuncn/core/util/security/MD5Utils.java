@@ -38,7 +38,7 @@ public class MD5Utils {
      * @throws IOException
      */
     public static String md5(File file) throws IOException {
-        MessageDigest messagedigest = null;
+        MessageDigest messagedigest;
         FileInputStream in = null;
         FileChannel ch = null;
         byte[] encodeBytes = null;
@@ -52,12 +52,16 @@ public class MD5Utils {
         } catch (NoSuchAlgorithmException neverHappened) {
             throw new RuntimeException(neverHappened);
         } finally {
-            if (in != null) {
-                in.close();
-            }
-            if (ch != null) {
-                ch.close();
-            }
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            }catch (IOException e){}
+            try {
+                if (ch != null) {
+                    ch.close();
+                }
+            }catch (IOException e){}
         }
 
         return toHexString(encodeBytes);
@@ -69,7 +73,7 @@ public class MD5Utils {
      * @return
      */
     public static String md5(String string) {
-        byte[] encodeBytes = null;
+        byte[] encodeBytes;
         try {
             encodeBytes = MessageDigest.getInstance("MD5").digest(string.getBytes("UTF-8"));
         } catch (NoSuchAlgorithmException neverHappened) {

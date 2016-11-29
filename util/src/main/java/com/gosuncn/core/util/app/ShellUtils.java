@@ -110,7 +110,7 @@ public class ShellUtils {
                     continue;
                 }
 
-                // donnot use os.writeBytes(commmand), avoid chinese charset error
+                // do not use os.writeBytes(command), avoid chinese charset error
                 os.write(command.getBytes());
                 os.writeBytes(COMMAND_LINE_END);
                 os.flush();
@@ -166,7 +166,7 @@ public class ShellUtils {
     public static class CommandResult {
 
         /** result of command **/
-        public int    result;
+        public int result;
         /** success message of command result **/
         public String successMsg;
         /** error message of command result **/

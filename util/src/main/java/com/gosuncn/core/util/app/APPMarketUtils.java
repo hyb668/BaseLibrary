@@ -38,12 +38,10 @@ public class APPMarketUtils {
 
     /**
      * 获得跳转到应用市场的intent（指定应用）
-     *
-     * @param paramContext
      * @param packageName
      * @return
      */
-    public static Intent getIntent(Context paramContext, String packageName) {
+    public static Intent getIntent(String packageName) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=" + packageName));
         return intent;
@@ -72,10 +70,6 @@ public class APPMarketUtils {
      */
     public static boolean judge(Context paramContext, Intent paramIntent) {
         List<ResolveInfo> localList = paramContext.getPackageManager().queryIntentActivities(paramIntent, PackageManager.GET_INTENT_FILTERS);
-        if ((localList != null) && (localList.size() > 0)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (localList != null) && (localList.size() > 0);
     }
 }

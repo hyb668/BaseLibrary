@@ -1,12 +1,14 @@
 # BaseLibrary Releases #
 
-<!--
-### Version 0.2.0 - November 18th 2016 ###
+### Util 1.1.1 - November 29th 2016 ###
 
-* New:
-* Fix:
--->
+* New: add PreferencesHelper.
+* Fix: DateUtils.numToUpper(); ImageUtils.rotateBitmapTranslate();
 
+### Version 1.0.0 - November 29th 2016 ###
+
+* New: add ui module and some sample classes.
+* Fix: see todo item,later will do that
 
 ### Version 0.1.0 – November 18th 2016 ###
 

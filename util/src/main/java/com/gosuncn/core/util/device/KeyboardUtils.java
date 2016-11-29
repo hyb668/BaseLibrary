@@ -47,11 +47,11 @@ public class KeyboardUtils {
 	 * @param activity
 	 */
 	public static void hideSoftInputView(Activity activity) {
-		View currentFoucsView = activity.getCurrentFocus();
-		if (currentFoucsView != null) {
+		View currentFocus = activity.getCurrentFocus();
+		if (currentFocus != null) {
 			((InputMethodManager) activity
 					.getSystemService(Context.INPUT_METHOD_SERVICE))
-					.hideSoftInputFromWindow(currentFoucsView.getWindowToken(),
+					.hideSoftInputFromWindow(currentFocus.getWindowToken(),
 							0);
 		}
 	}

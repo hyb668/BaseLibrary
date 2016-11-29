@@ -34,13 +34,13 @@ import java.net.URLConnection;
 public class ImageUtils {
 
 	/** 图片处理：裁剪. */
-	public static final int CUTIMG = 0;
+	public static final int CUT_IMG = 0;
 
 	/** 图片处理：缩放. */
-	public static final int SCALEIMG = 1;
+	public static final int SCALE_IMG = 1;
 
 	/** 图片处理：不处理. */
-	public static final int ORIGINALIMG = 2;
+	public static final int ORIGINAL_IMG = 2;
 
 	/** 图片最大宽度. */
 	public static final int MAX_WIDTH = 4096/2;
@@ -64,7 +64,7 @@ public class ImageUtils {
 	public static Bitmap getBitmap(String url, int type,
 								   int desiredWidth, int desiredHeight) {
 		Bitmap bm = null;
-		URLConnection con = null;
+		URLConnection con;
 		InputStream is = null;
 		try {
 			URL imageURL = new URL(url);
@@ -74,9 +74,9 @@ public class ImageUtils {
 			is = con.getInputStream();
 			// 获取资源图片
 			Bitmap wholeBm = BitmapFactory.decodeStream(is, null, null);
-			if (type == CUTIMG) {
+			if (type == CUT_IMG) {
 				bm = getCutBitmap(wholeBm, desiredWidth, desiredHeight);
-			} else if (type == SCALEIMG) {
+			} else if (type == SCALE_IMG) {
 				bm = getScaleBitmap(wholeBm, desiredWidth, desiredHeight);
 			} else {
 				bm = wholeBm;
@@ -125,7 +125,7 @@ public class ImageUtils {
 	 */
 	public static Bitmap getScaleBitmap(File file, int desiredWidth, int desiredHeight) {
 
-		Bitmap resizeBmp = null;
+		Bitmap resizeBmp;
 		BitmapFactory.Options opts = new BitmapFactory.Options();
 		// 设置为true,decodeFile先不创建内存 只获取一些解码边界信息即图片大小信息
 		opts.inJustDecodeBounds = true;
@@ -152,7 +152,7 @@ public class ImageUtils {
 		// 以下两个字段需一起使用：
 		// 产生的位图将得到像素空间，如果系统gc，那么将被清空。当像素再次被访问，如果Bitmap已经decode，那么将被自动重新解码
 		opts.inPurgeable = true;
-		// 位图可以共享一个参考输入数据(inputstream、阵列等)
+		// 位图可以共享一个参考输入数据(inputStream、阵列等)
 		opts.inInputShareable = true;
 
 		// inSampleSize=2 表示图片宽高都为原来的二分之一，即图片为原来的四分之一
@@ -198,7 +198,7 @@ public class ImageUtils {
 		if (!checkBitmap(bitmap)) {
 			return null;
 		}
-		Bitmap resizeBmp = null;
+		Bitmap resizeBmp;
 
 		// 获得图片的宽高
 		int srcWidth = bitmap.getWidth();
@@ -242,7 +242,7 @@ public class ImageUtils {
 			int bmpW = bitmap.getWidth();
 			int bmpH = bitmap.getHeight();
 			
-			// 注意这个Matirx是android.graphics底下的那个
+			// 注意这个Matrix是android.graphics底下的那个
 			Matrix matrix = new Matrix();
 			// 设置缩放系数，分别为原来的0.8和0.8
 			matrix.postScale(scale, scale);
@@ -300,7 +300,7 @@ public class ImageUtils {
 		// 以下两个字段需一起使用：
 		// 产生的位图将得到像素空间，如果系统gc，那么将被清空。当像素再次被访问，如果Bitmap已经decode，那么将被自动重新解码
 		opts.inPurgeable = true;
-		// 位图可以共享一个参考输入数据(inputstream、阵列等)
+		// 位图可以共享一个参考输入数据(inputStream、阵列等)
 		opts.inInputShareable = true;
 		// 缩放的比例，缩放是很难按准备的比例进行缩放的，通过inSampleSize来进行缩放，其值表明缩放的倍数，SDK中建议其值是2的指数值
 		if (scale < 0.25) {
@@ -580,7 +580,7 @@ public class ImageUtils {
 	 *            图片格式的byte[]数组
 	 * @return bitmap 得到的Bitmap
 	 */
-	public static Bitmap bytes2Bimap(byte[] b) {
+	public static Bitmap bytes2Bitmap(byte[] b) {
 		Bitmap bitmap = null;
 		try {
 			if (b.length != 0) {
@@ -611,7 +611,7 @@ public class ImageUtils {
 	}
 
 	/**
-	 * 将View转换为Drawable.需要最上层布局为Linearlayout
+	 * 将View转换为Drawable.需要最上层布局为LinearLayout
 	 * 
 	 * @param view
 	 *            要转换为Drawable的View
@@ -620,9 +620,9 @@ public class ImageUtils {
 	public static Drawable view2Drawable(View view) {
 		BitmapDrawable mBitmapDrawable = null;
 		try {
-			Bitmap newbmp = view2Bitmap(view);
-			if (newbmp != null) {
-				mBitmapDrawable = new BitmapDrawable(newbmp);
+			Bitmap bitmap = view2Bitmap(view);
+			if (bitmap != null) {
+				mBitmapDrawable = new BitmapDrawable(bitmap);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -631,7 +631,7 @@ public class ImageUtils {
 	}
 
 	/**
-	 * 将View转换为Bitmap.需要最上层布局为Linearlayout
+	 * 将View转换为Bitmap.需要最上层布局为LinearLayout
 	 * 
 	 * @param view
 	 *            要转换为bitmap的View
@@ -691,8 +691,7 @@ public class ImageUtils {
 		try {
 			Matrix m = new Matrix();
 			m.setRotate(degrees % 360);
-			mBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
-					bitmap.getHeight(), m, false);
+			mBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -726,6 +725,7 @@ public class ImageUtils {
 			matrix.preTranslate(-cx, -cy);
 			matrix.postRotate(degrees);
 			matrix.postTranslate(cx, cy);
+			mBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -827,9 +827,8 @@ public class ImageUtils {
 			// Draw in the original image
 			canvas.drawBitmap(bitmap, 0, 0, null);
 			// Draw in the gap
-			Paint deafaultPaint = new Paint();
-			canvas.drawRect(0, height, width, height + reflectionGap,
-					deafaultPaint);
+			Paint defaultPaint = new Paint();
+			canvas.drawRect(0, height, width, height + reflectionGap, defaultPaint);
 			// Draw in the reflection
 			canvas.drawBitmap(reflectionImage, 0, height + reflectionGap, null);
 			// Create a shader that is a linear gradient that covers the
@@ -843,8 +842,7 @@ public class ImageUtils {
 			// Set the Transfer mode to be porter duff and destination in
 			paint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
 			// Draw a rectangle using the paint with our linear gradient
-			canvas.drawRect(0, height, width, bitmapWithReflection.getHeight()
-					+ reflectionGap, paint);
+			canvas.drawRect(0, height, width, bitmapWithReflection.getHeight() + reflectionGap, paint);
 
 			bitmap = bitmapWithReflection;
 		} catch (Exception e) {
@@ -868,6 +866,7 @@ public class ImageUtils {
 					bitmap.recycle();
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			bitmap = null;
 		}
@@ -890,6 +889,7 @@ public class ImageUtils {
 					}
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -948,11 +948,10 @@ public class ImageUtils {
 					* (int) Math.pow(2, 1) + comps[i + 2];
 			hashCode.append(MathUtils.binaryToHex(result));
 		}
-		String sourceHashCode = hashCode.toString();
 		// 得到指纹以后，就可以对比不同的图片，看看64位中有多少位是不一样的。
 		// 在理论上，这等同于计算"汉明距离"（Hamming distance）。
 		// 如果不相同的数据位不超过5，就说明两张图片很相似；如果大于10，就说明这是两张不同的图片。
-		return sourceHashCode;
+		return hashCode.toString();
 	}
 
 

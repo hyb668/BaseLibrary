@@ -27,13 +27,12 @@ public class AESUtils {
 	public static String encrypt(String seed, String clearText) {
 		byte[] result = null;
 		try {
-			byte[] rawkey = getRawKey(seed.getBytes());
-			result = encrypt(rawkey, clearText.getBytes());
+			byte[] rawKey = getRawKey(seed.getBytes());
+			result = encrypt(rawKey, clearText.getBytes());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String content = toHex(result);
-		return content;
+		return toHex(result);
 
 	}
 
@@ -50,8 +49,7 @@ public class AESUtils {
 			rawKey = getRawKey(seed.getBytes());
 			byte[] enc = toByte(encrypted);
 			byte[] result = decrypt(rawKey, enc);
-			String coentn = new String(result);
-			return coentn;
+			return new String(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -60,32 +58,26 @@ public class AESUtils {
 	}
 
 	private static byte[] getRawKey(byte[] seed) throws Exception {
-		KeyGenerator kgen = KeyGenerator.getInstance("AES");
+		KeyGenerator keyGen = KeyGenerator.getInstance("AES");
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 		sr.setSeed(seed);
-		kgen.init(128, sr);
-		SecretKey sKey = kgen.generateKey();
-		byte[] raw = sKey.getEncoded();
-		return raw;
+		keyGen.init(128, sr);
+		SecretKey sKey = keyGen.generateKey();
+		return sKey.getEncoded();
 	}
 
 	private static byte[] encrypt(byte[] raw, byte[] clear) throws Exception {
-		SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+		SecretKeySpec keySpec = new SecretKeySpec(raw, "AES");
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		cipher.init(Cipher.ENCRYPT_MODE, skeySpec, new IvParameterSpec(
-				new byte[cipher.getBlockSize()]));
-		byte[] encrypted = cipher.doFinal(clear);
-		return encrypted;
+		cipher.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
+		return cipher.doFinal(clear);
 	}
 
-	private static byte[] decrypt(byte[] raw, byte[] encrypted)
-			throws Exception {
-		SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+	private static byte[] decrypt(byte[] raw, byte[] encrypted) throws Exception {
+		SecretKeySpec keySpec = new SecretKeySpec(raw, "AES");
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		cipher.init(Cipher.DECRYPT_MODE, skeySpec, new IvParameterSpec(
-				new byte[cipher.getBlockSize()]));
-		byte[] decrypted = cipher.doFinal(encrypted);
-		return decrypted;
+		cipher.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(new byte[cipher.getBlockSize()]));
+		return cipher.doFinal(encrypted);
 	}
 
 	public static String toHex(String txt) {

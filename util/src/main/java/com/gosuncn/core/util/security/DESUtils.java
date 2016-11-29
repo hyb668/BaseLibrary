@@ -41,8 +41,7 @@ public class DESUtils {
             // 转化key
             DESedeKeySpec deSedeKeySpec = new DESedeKeySpec(bytesKey);
             SecretKeyFactory factory = SecretKeyFactory.getInstance("DESede");
-            SecretKey generateSecret = factory.generateSecret(deSedeKeySpec);
-            return generateSecret;
+            return factory.generateSecret(deSedeKeySpec);
         } catch (Exception e) {
             Log.e(TAG,"生成KEY出错："+e.getMessage());
         }
@@ -57,8 +56,7 @@ public class DESUtils {
             // 加密
             Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, generateSecret);
-            byte[] result = cipher.doFinal(str.getBytes("utf-8"));
-            return result;
+            return cipher.doFinal(str.getBytes("utf-8"));
         } catch (Exception e) {
             Log.e(TAG,"加密出错："+e.getMessage());
         }

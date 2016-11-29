@@ -1,5 +1,6 @@
 package com.gosuncn.core.util.app;
 
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,11 +9,15 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 
 import java.io.File;
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.value;
 
 /**
  * App辅助类
@@ -73,7 +78,7 @@ public class AppUtils {
     public static String getVersionCode(Context context, String defaultCode) {
 
         try {
-            // 获取packagemanager的实例
+            // 获取packageManager的实例
             PackageManager packageManager = context.getPackageManager();
             // getPackageName()是你当前类的包名，0代表是获取版本信息
             PackageInfo packInfo;
@@ -103,8 +108,7 @@ public class AppUtils {
     public static int getUid(Context context, String packageName) {
         try {
             PackageManager pm = context.getPackageManager();
-            ApplicationInfo ai = pm.getApplicationInfo(packageName,
-                    PackageManager.GET_ACTIVITIES);
+            ApplicationInfo ai = pm.getApplicationInfo(packageName, PackageManager.GET_ACTIVITIES);
             return ai.uid;
         } catch (NameNotFoundException e) {
             e.printStackTrace();
@@ -122,11 +126,11 @@ public class AppUtils {
      */
     public static boolean isAppInstalled(Context context, String packageName) {
         final PackageManager packageManager = context.getPackageManager();
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-        List<String> pName = new ArrayList<String>();
-        if (pinfo != null) {
-            for (int i = 0; i < pinfo.size(); i++) {
-                String pn = pinfo.get(i).packageName;
+        List<PackageInfo> info = packageManager.getInstalledPackages(0);
+        List<String> pName = new ArrayList<>();
+        if (info != null) {
+            for (int i = 0; i < info.size(); i++) {
+                String pn = info.get(i).packageName;
                 pName.add(pn);
             }
         }
@@ -154,6 +158,7 @@ public class AppUtils {
      * @param packageName 目标应用安装后的包名
      * @return 是否已安装目标应用
      */
+    @Deprecated
     public  static boolean isInstallByread(String packageName) {
         return new File("/data/data/" + packageName).exists();
     }
@@ -166,6 +171,7 @@ public class AppUtils {
      * @param className
      *            某个界面名称
      */
+    @Deprecated
     public static boolean isForeground(Context context, String className) {
         if (context == null || TextUtils.isEmpty(className)) {
             return false;

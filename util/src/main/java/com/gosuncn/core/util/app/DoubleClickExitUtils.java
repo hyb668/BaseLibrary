@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2013 Peng fei Pan <sky@xiaopan.me>
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *   http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.gosuncn.core.util.app;
 
 import android.content.Context;
@@ -25,16 +9,16 @@ import java.util.Locale;
  * 双击退出识别器
  */
 public class DoubleClickExitUtils {
-	public static String DEFAULT_HINT_MESSAGE_CHINA = "再按一次退出程序";
-	public static String DEFAULT_HINT_MESSAGE_OTHER = "Press again to exit the program";
+	public static final String DEFAULT_HINT_MESSAGE_CHINA = "再按一次退出程序";
+	public static final String DEFAULT_HINT_MESSAGE_OTHER = "Press again to exit the program";
 	private int effectiveIntervalTime;	// 有效的间隔时间，单位毫秒
 	private long lastClickTime;	// 上次点击时间
 	private String hintMessage;	// 提示消息
-	private Context context;
+	private final Context context;
 
 	/**
 	 * 创建一个双击退出识别器
-	 * @param context Androdi上下文
+	 * @param context Android上下文
 	 * @param hintMessage 提示消息
 	 * @param effectiveIntervalTime 有效间隔时间
 	 */
@@ -46,7 +30,7 @@ public class DoubleClickExitUtils {
 
 	/**
 	 * 创建一个双击退出识别器，有效间隔时间默认为2000毫秒
-	 * @param context Androdi上下文
+	 * @param context Android上下文
 	 * @param hintContent 提示消息
 	 */
 	public DoubleClickExitUtils(Context context, String hintContent) {
@@ -55,7 +39,7 @@ public class DoubleClickExitUtils {
 
 	/**
 	 * 创建一个双击退出识别器，中国环境下默认提示消息为“再按一次退出程序”，其它环境下默认提示消息为“Press again to exit the program”；有效间隔时间默认为2000毫秒
-	 * @param context Androdi 上下文
+	 * @param context Android 上下文
 	 */
 	public DoubleClickExitUtils(Context context) {
 		this(context, Locale.CHINA.equals(Locale.getDefault()) ? DEFAULT_HINT_MESSAGE_CHINA : DEFAULT_HINT_MESSAGE_OTHER, 2000);

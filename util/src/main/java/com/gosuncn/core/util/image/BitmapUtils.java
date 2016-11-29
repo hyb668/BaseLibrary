@@ -37,16 +37,13 @@ public class BitmapUtils {
 
     /**
      * 提取缩略图
-     *
-     * @param isFromAssets
      * @param path
      * @param requireWidth
      * @param requireHeight
      * @param loseLessQuality 是否较少地丢失图片质量 如果为true表示按宽度和高度的缩小倍数中的较少者进行采样。
      * @return
      */
-    public static Bitmap sample(boolean isFromAssets, String path, int requireWidth, int requireHeight,
-                                boolean loseLessQuality) {
+    public static Bitmap sample(String path, int requireWidth, int requireHeight, boolean loseLessQuality) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPurgeable = true;
         options.inInputShareable = true;
@@ -55,20 +52,20 @@ public class BitmapUtils {
          * "options.inJustDecodeBounds = true"这步是为了设置options.inSampleSize
          */
         options.inJustDecodeBounds = true;
-        InputStream is = null;
+        InputStream is;
         try {
             is = new FileInputStream(path);
         } catch (FileNotFoundException e) {
             return null;
         }
         BitmapFactory.decodeStream(is, null, options);
-        int widthMinification = (int) Math.ceil((float) options.outWidth / (float) requireWidth);
-        int heightMinification = (int) Math.ceil((float) options.outHeight / (float) requireHeight);
+        int widthMinimum = (int) Math.ceil((float) options.outWidth / (float) requireWidth);
+        int heightMinimum = (int) Math.ceil((float) options.outHeight / (float) requireHeight);
 
         if (loseLessQuality) {
-            options.inSampleSize = Math.min(widthMinification, heightMinification);
+            options.inSampleSize = Math.min(widthMinimum, heightMinimum);
         } else {
-            options.inSampleSize = Math.max(widthMinification, heightMinification);
+            options.inSampleSize = Math.max(widthMinimum, heightMinimum);
         }
         close(is);
 
@@ -193,8 +190,8 @@ public class BitmapUtils {
             newHeight=bgHeight;
         }
 
-        Bitmap newbmp = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-        Canvas cv = new Canvas(newbmp);
+        Bitmap newBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+        Canvas cv = new Canvas(newBitmap);
         //draw bg into
         cv.drawBitmap(background, 0, 0, null);//在 0，0坐标开始画入bg
         //draw fg into
@@ -204,25 +201,24 @@ public class BitmapUtils {
         //store
         cv.restore();//存储
 
-        return newbmp;
+        return newBitmap;
     }
 
     /**
      * 保存Bitmap到本地
      *
-     * @param dirpath  保存目录
+     * @param dirPath  保存目录
      * @param filename 图片名（包含后缀）
      * @param bitmap   欲保存的图片
      * @param isDelete 是否只保留一张
      */
-    public static void saveBitmap(String dirpath, String filename,
-                                  Bitmap bitmap, boolean isDelete) {
-        File dir = new File(dirpath);
+    public static void saveBitmap(String dirPath, String filename, Bitmap bitmap, boolean isDelete) {
+        File dir = new File(dirPath);
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        File file = new File(dirpath, filename);
+        File file = new File(dirPath, filename);
         // 若存在即删除-默认只保留一张
         if (isDelete) {
             if (file.exists()) {
@@ -234,7 +230,6 @@ public class BitmapUtils {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -328,19 +323,17 @@ public class BitmapUtils {
 
     /**
      * 旋转图片一定角度
-     * rotaingImageView
+     * rotateImageView
      *
      * @return Bitmap
      * @throws
      */
-    public static Bitmap rotaingImageView(int angle, Bitmap bitmap) {
+    public static Bitmap rotateImageView(int angle, Bitmap bitmap) {
         // 旋转图片 动作
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         // 创建新的图片
-        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
-                bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        return resizedBitmap;
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 
     /**

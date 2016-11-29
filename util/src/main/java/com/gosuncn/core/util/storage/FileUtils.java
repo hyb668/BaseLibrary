@@ -171,7 +171,7 @@ public class FileUtils {
      * 创建文件根目录
      */
     public static void makeRootDirectory(String filePath) {
-        File file = null;
+        File file;
         try {
             file = new File(filePath);
             if (!file.exists()) {

@@ -67,14 +67,14 @@ public class AnimationUtils {
      * @param startOffset 执行前的等待时间
      * @return
      */
-    public static Animation rorateAnimation(int repeatCount, int duration, boolean fillAfter, long startOffset) {
-        Animation rorateAnimation = new RotateAnimation(0f, -360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rorateAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
-        rorateAnimation.setRepeatCount(repeatCount);//设置重复次数
-        rorateAnimation.setFillAfter(fillAfter);//动画执行完后是否停留在执行完的状态
-        rorateAnimation.setStartOffset(startOffset);//执行前的等待时间
-        rorateAnimation.setDuration(duration);
-        return rorateAnimation;
+    public static Animation rotateAnimation(int repeatCount, int duration, boolean fillAfter, long startOffset) {
+        Animation rotateAnimation = new RotateAnimation(0f, -360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        rotateAnimation.setRepeatCount(repeatCount);//设置重复次数
+        rotateAnimation.setFillAfter(fillAfter);//动画执行完后是否停留在执行完的状态
+        rotateAnimation.setStartOffset(startOffset);//执行前的等待时间
+        rotateAnimation.setDuration(duration);
+        return rotateAnimation;
     }
 
     /**

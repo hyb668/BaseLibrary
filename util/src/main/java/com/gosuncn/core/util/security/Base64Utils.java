@@ -15,8 +15,7 @@ public class Base64Utils {
 	 * @return
 	 */
 	public static String encode(String str){
-		String strBase64 = new String(Base64.encode(str.getBytes(), Base64.DEFAULT));
-		return strBase64;
+		return new String(Base64.encode(str.getBytes(), Base64.DEFAULT));
 	}
 	
 	/**
@@ -25,7 +24,6 @@ public class Base64Utils {
 	 * @return
 	 */
 	public static String decode(String strBase64){
-		String str=new String(Base64.decode(strBase64.getBytes(), Base64.DEFAULT));
-		return str;
+		return new String(Base64.decode(strBase64.getBytes(), Base64.DEFAULT));
 	}
 }

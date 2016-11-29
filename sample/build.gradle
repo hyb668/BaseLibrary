@@ -25,6 +25,8 @@ android {
         targetSdkVersion cfg.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -56,7 +58,6 @@ android {
         }
 
         debug {
-            applicationIdSuffix '.debug'  // apk以applicationID区分，允许一个设备安装多类型的apk
             versionNameSuffix '-debug' // 版本名
         }
     }
@@ -67,12 +68,11 @@ android {
 
         alpha {//产品名，不能使用build type名称和预定义名称androidTest
             dimension 'client'  // 声明属于哪种规范的版本
-            applicationId 'com.tong.mybaselibrary.alpha' // 支持一个设备安装多个不同版本产品
         }
 
         beta {
             dimension 'client'
-            applicationId 'com.tong.mybaselibrary.beta'
+            applicationId 'com.gosuncn.sample.beta'// apk以applicationID区分，允许一个设备安装多类型的apk
         }
 
         pay {

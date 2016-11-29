@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static android.R.attr.type;
-
 /**
  * 日期工具类
  *
@@ -25,7 +23,7 @@ public class DateUtils {
     public final static String FORMAT_DATE1_TIME = "yyyy/MM/dd HH:mm:ss";
     public final static String FORMAT_DATE_TIME_SECOND = "yyyy/MM/dd HH:mm:ss";
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat();
+    private static final SimpleDateFormat sdf = new SimpleDateFormat();
     private static final int YEAR = 365 * 24 * 60 * 60;// 年
     private static final int MONTH = 30 * 24 * 60 * 60;// 月
     private static final int DAY = 24 * 60 * 60;// 天
@@ -42,7 +40,7 @@ public class DateUtils {
         long currentTime = System.currentTimeMillis();
         long timeGap = (currentTime - timestamp) / 1000;// 与现在时间相差秒数
         System.out.println("timeGap: " + timeGap);
-        String timeStr = null;
+        String timeStr;
         if (timeGap > YEAR) {
             timeStr = timeGap / YEAR + "年前";
         } else if (timeGap > MONTH) {
@@ -76,7 +74,7 @@ public class DateUtils {
         long currentTime = System.currentTimeMillis();
         long timeGap = (currentTime - timestamp) / 1000;// 与现在时间相差秒数
         System.out.println("timeGap: " + timeGap);
-        String timeStr = null;
+        String timeStr;
         if (timeGap > YEAR) {
             //timeStr = timeGap / YEAR + "年前";
             timeStr = timestampToDateStr(timestamp, "MM-dd-yyyy");
@@ -132,8 +130,7 @@ public class DateUtils {
      */
     public static String timestampToDate(long timestamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String sd = sdf.format(new Date(timestamp));
-        return sd;
+        return sdf.format(new Date(timestamp));
     }
 
    /* public static String timestampToDateStr(long timestamp,String pattern) {
@@ -151,8 +148,7 @@ public class DateUtils {
      */
     public static String timestampToDateStr(long timestamp, String pattern) {
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        String sd = sdf.format(new Date(timestamp));
-        return sd;
+        return sdf.format(new Date(timestamp));
     }
 
     /**
@@ -165,8 +161,7 @@ public class DateUtils {
     public static Date timestampToDate(long timestamp, String pattern) {
         Date dateOld = new Date(timestamp); // 根据long类型的毫秒数生命一个date类型的时间
         String sDateTime = dateToString(dateOld, pattern); // 把date类型的时间转换为string
-        Date date = stringToDate(sDateTime, pattern); // 把String类型转换为Date类型
-        return date;
+        return stringToDate(sDateTime, pattern);
     }
 
     /**
@@ -241,8 +236,7 @@ public class DateUtils {
         if (date == null) {
             return 0;
         } else {
-            long currentTime = dateToTimestamp(date); // date类型转成long类型
-            return currentTime;
+            return dateToTimestamp(date);
         }
     }
 
@@ -287,31 +281,30 @@ public class DateUtils {
     /**
      * 获取时间的相对性（今天，昨天，前天）
      *
-     * @param timesamp 毫秒
+     * @param timeStamp 毫秒
      * @return
      */
-    public static String getDetailTime(long timesamp) {
-        long clearTime = timesamp;
+    public static String getDetailTime(long timeStamp) {
         String result = "";
         SimpleDateFormat sdf = new SimpleDateFormat("dd");
         Date today = new Date(System.currentTimeMillis());
-        Date otherDay = new Date(clearTime);
+        Date otherDay = new Date(timeStamp);
         int temp = Integer.parseInt(sdf.format(today))
                 - Integer.parseInt(sdf.format(otherDay));
 
         switch (temp) {
             case 0:
-                result = "今天 " + getHourAndMin(clearTime);
+                result = "今天 " + getHourAndMin(timeStamp);
                 break;
             case 1:
-                result = "昨天 " + getHourAndMin(clearTime);
+                result = "昨天 " + getHourAndMin(timeStamp);
                 break;
             case 2:
-                result = "前天 " + getHourAndMin(clearTime);
+                result = "前天 " + getHourAndMin(timeStamp);
                 break;
 
             default:
-                result = getTime(clearTime);
+                result = getTime(timeStamp);
                 break;
         }
 
@@ -330,7 +323,7 @@ public class DateUtils {
         if (time == null || "".equals(time)) {
             return 0;
         }
-        Date date = null;
+        Date date;
         try {
             date = format.parse(time);
         } catch (ParseException e) {
@@ -533,10 +526,7 @@ public class DateUtils {
         Calendar c2 = Calendar.getInstance();
         c2.setTime(new Date());
         int m2 = c2.get(Calendar.MONTH);
-        if (m1 == m2) {
-            return true;
-        }
-        return false;
+        return m1 == m2;
     }
 
     /**
@@ -575,17 +565,17 @@ public class DateUtils {
         String u1[] = { "〇", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
         String u2[] = { "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" };
         char[] str = String.valueOf(num).toCharArray();
-        String rstr = "";
-        if (type == 1) {
+        String rStr = "";
+        if (reverseType == 1) {
             for (int i = 0; i < str.length; i++) {
-                rstr = rstr + u1[Integer.parseInt(str[i] + "")];
+                rStr = rStr + u1[Integer.parseInt(str[i] + "")];
             }
-        } else if (type == 2) {
+        } else if (reverseType == 2) {
             for (int i = 0; i < str.length; i++) {
-                rstr = rstr + u2[Integer.parseInt(str[i] + "")];
+                rStr = rStr + u2[Integer.parseInt(str[i] + "")];
             }
         }
-        return rstr;
+        return rStr;
     }
 
     /**
@@ -597,11 +587,11 @@ public class DateUtils {
     public static String numToUpper(int num) {
         String u1[] = { "〇", "一", "二", "三", "四", "五", "六", "日"};
         char[] str = String.valueOf(num).toCharArray();
-        String rstr = "";
+        String rStr = "";
         for (int i = 0; i < str.length; i++) {
-            rstr = rstr + u1[Integer.parseInt(str[i] + "")];
+            rStr = rStr + u1[Integer.parseInt(str[i] + "")];
         }
-        return rstr;
+        return rStr;
     }
 
 

@@ -1,18 +1,3 @@
-/**
- * Copyright (c) 2012-2013, Michael Yang 杨福海 (www.yangfuhai.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.gosuncn.core.util.storage;
 
 import android.content.Context;
@@ -66,7 +51,7 @@ public class DataCacheUtils {
     /** 无限缓存数量*/
     private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
 
-    private static Map<String, DataCacheUtils> mInstanceMap = new HashMap<String, DataCacheUtils>();
+    private static final Map<String, DataCacheUtils> mInstanceMap = new HashMap<>();
 
     private ACacheManager mCache;
 
@@ -83,15 +68,15 @@ public class DataCacheUtils {
         return get(cacheDir, MAX_SIZE, MAX_COUNT);
     }
 
-    public static DataCacheUtils get(Context ctx, long max_zise, int max_count) {
+    public static DataCacheUtils get(Context ctx, long maxSize, int maxCount) {
         File f = new File(ctx.getCacheDir(), "ACache");
-        return get(f, max_zise, max_count);
+        return get(f, maxSize, maxCount);
     }
 
-    public static DataCacheUtils get(File cacheDir, long max_zise, int max_count) {
+    public static DataCacheUtils get(File cacheDir, long maxSize, int maxCount) {
         DataCacheUtils manager = mInstanceMap.get(cacheDir.getAbsoluteFile() + myPid());
         if (manager == null) {
-            manager = new DataCacheUtils(cacheDir, max_zise, max_count);
+            manager = new DataCacheUtils(cacheDir, maxSize, maxCount);
             mInstanceMap.put(cacheDir.getAbsolutePath() + myPid(), manager);
         }
         return manager;
@@ -101,11 +86,11 @@ public class DataCacheUtils {
         return "_" + android.os.Process.myPid();
     }
 
-    private DataCacheUtils(File cacheDir, long max_size, int max_count) {
+    private DataCacheUtils(File cacheDir, long max_size, int maxCount) {
         if (!cacheDir.exists() && !cacheDir.mkdirs()) {
             throw new RuntimeException("can't make dirs in " + cacheDir.getAbsolutePath());
         }
-        mCache = new ACacheManager(cacheDir, max_size, max_count);
+        mCache = new ACacheManager(cacheDir, max_size, maxCount);
     }
 
     /**
@@ -154,14 +139,14 @@ public class DataCacheUtils {
      * @param key
      * @param list
      */
-    public <T extends Serializable> void put(String key, List<T> list, int savaTime) {
+    public <T extends Serializable> void put(String key, List<T> list, int saveTime) {
         if (list != null) {
             int len = list.size();
             if (len != 0) {
                 removeList(key);
             }
             for (int i = 0; i < len; i++) {
-                put(key + i, list.get(i), savaTime);
+                put(key + i, list.get(i), saveTime);
             }
         }
     }
@@ -329,8 +314,7 @@ public class DataCacheUtils {
     public JSONObject getAsJSONObject(String key) {
         String JSONString = getAsString(key);
         try {
-            JSONObject obj = new JSONObject(JSONString);
-            return obj;
+            return new JSONObject(JSONString);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -524,13 +508,13 @@ public class DataCacheUtils {
      *            保存的时间，单位：秒
      */
     public void put(String key, Serializable value, int saveTime) {
-        ByteArrayOutputStream baos = null;
+        ByteArrayOutputStream outputStream;
         ObjectOutputStream oos = null;
         try {
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
+            outputStream = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(outputStream);
             oos.writeObject(value);
-            byte[] data = baos.toByteArray();
+            byte[] data = outputStream.toByteArray();
             if (saveTime != -1) {
                 put(key, data, saveTime);
             } else {
@@ -542,6 +526,7 @@ public class DataCacheUtils {
             try {
                 oos.close();
             } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -555,20 +540,19 @@ public class DataCacheUtils {
     public Object getAsObject(String key) {
         byte[] data = getAsBinary(key);
         if (data != null) {
-            ByteArrayInputStream bais = null;
+            ByteArrayInputStream inputStream = null;
             ObjectInputStream ois = null;
             try {
-                bais = new ByteArrayInputStream(data);
-                ois = new ObjectInputStream(bais);
-                Object reObject = ois.readObject();
-                return reObject;
+                inputStream = new ByteArrayInputStream(data);
+                ois = new ObjectInputStream(inputStream);
+                return ois.readObject();
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             } finally {
                 try {
-                    if (bais != null)
-                        bais.close();
+                    if (inputStream != null)
+                        inputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -624,7 +608,7 @@ public class DataCacheUtils {
         if (getAsBinary(key) == null) {
             return null;
         }
-        return Utils.Bytes2Bimap(getAsBinary(key));
+        return Utils.Bytes2Bitmap(getAsBinary(key));
     }
 
     // =======================================
@@ -667,7 +651,7 @@ public class DataCacheUtils {
         if (getAsBinary(key) == null) {
             return null;
         }
-        return Utils.bitmap2Drawable(Utils.Bytes2Bimap(getAsBinary(key)));
+        return Utils.bitmap2Drawable(Utils.Bytes2Bitmap(getAsBinary(key)));
     }
 
     /**
@@ -709,7 +693,7 @@ public class DataCacheUtils {
         private final long sizeLimit;
         private final int countLimit;
         private final Map<File, Long> lastUsageDates = Collections.synchronizedMap(new HashMap<File, Long>());
-        protected File cacheDir;
+        protected final File cacheDir;
 
         private ACacheManager(File cacheDir, long sizeLimit, int countLimit) {
             this.cacheDir = cacheDir;
@@ -880,10 +864,10 @@ public class DataCacheUtils {
 
         private static byte[] newByteArrayWithDateInfo(int second, byte[] data2) {
             byte[] data1 = createDateInfo(second).getBytes();
-            byte[] retdata = new byte[data1.length + data2.length];
-            System.arraycopy(data1, 0, retdata, 0, data1.length);
-            System.arraycopy(data2, 0, retdata, data1.length, data2.length);
-            return retdata;
+            byte[] retData = new byte[data1.length + data2.length];
+            System.arraycopy(data1, 0, retData, 0, data1.length);
+            System.arraycopy(data2, 0, retData, data1.length, data2.length);
+            return retData;
         }
 
         private static String clearDateInfo(String strInfo) {
@@ -948,15 +932,15 @@ public class DataCacheUtils {
             if (bm == null) {
                 return null;
             }
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            return baos.toByteArray();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            return outputStream.toByteArray();
         }
 
         /*
          * byte[] → Bitmap
          */
-        private static Bitmap Bytes2Bimap(byte[] b) {
+        private static Bitmap Bytes2Bitmap(byte[] b) {
             if (b.length == 0) {
                 return null;
             }
