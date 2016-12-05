@@ -10,6 +10,14 @@
     <string name="view">View</string>
     <string name="adapter">Adapter</string>
     <string name="listener">Listener</string>
+    <string name="m_app">App</string>
+    <string name="device">Device</string>
+    <string name="convert">Convert</string>
+    <string name="image">Image</string>
+    <string name="security">Security</string>
+    <string name="storage">Storage</string>
+    <string name="string">String</string>
+    <string name="function">Function</string>
 
     <!--ui页面 start-->
 
@@ -27,9 +35,14 @@
     <string name="disable_scroll_viewpager">DisableScrollViewPager</string>
     <string name="square_layout">SquareLayout</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!--ui页面 end-->
+
+    <!--util页面 start-->
+
+    <!-- App -->
+    <string name="activity_utils">ActivityUtils</string>
+    <string name="handler">Handler</string>
+
+    <!--util页面 end-->
 
 </resources>

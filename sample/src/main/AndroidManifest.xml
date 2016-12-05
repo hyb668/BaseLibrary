@@ -20,6 +20,9 @@
         <activity
             android:name=".module.main.activity.UIActivity"
             android:label="@string/ui" />
+        <activity
+            android:name=".module.main.activity.UtilActivity"
+            android:label="@string/util" />
         <!-- Main  end -->
 
 
@@ -65,11 +68,29 @@
             android:label="@string/disable_scroll_viewpager" />
         <activity
             android:name=".module.ui.activity.SquareLayoutActivity"
-            android:label="@string/square_layout"/>
+            android:label="@string/square_layout" />
         <!-- View end -->
 
 
         <!-- UI  end -->
+
+
+        <!-- Util  start -->
+        <activity
+            android:name=".module.util.activity.AppActivity"
+            android:label="@string/m_app" />
+
+        <!-- App  start -->
+        <activity
+            android:name=".module.util.activity.ActivityUtilsActivity"
+            android:label="@string/activity_utils"/>
+        <activity
+            android:name=".module.util.activity.HandlerActivity"
+            android:label="@string/handler"/>
+        <!-- App  end -->
+
+
+        <!-- Util  end -->
 
     </application>
 

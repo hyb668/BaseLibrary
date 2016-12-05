@@ -1,116 +1,176 @@
+/**
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.gosuncn.core.util.device;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.gosuncn.core.util.view.StatusBarUtils;
+
 /**
  * 屏幕相关工具类
- * 
- * @author HWJ
- * 
  */
 public class ScreenUtils {
+
 	private ScreenUtils() {
-		throw new UnsupportedOperationException(
-				"sorry,ScreenUtil cannot be instantiated");
+		throw new UnsupportedOperationException("u can't instantiate me...");
 	}
 
 	/**
-	 * 获得屏幕高度
-	 * 
-	 * @param context
-	 * @return
+	 * 获取屏幕的宽度（单位：px）
+	 *
+	 * @param context 上下文
+	 * @return 屏幕宽px
 	 */
 	public static int getScreenWidth(Context context) {
-		WindowManager wm = (WindowManager) context
-				.getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics outMetrics = new DisplayMetrics();
-		wm.getDefaultDisplay().getMetrics(outMetrics);
-		return outMetrics.widthPixels;
+		WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();// 创建了一张白纸
+		windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
+		return dm.widthPixels;
 	}
 
 	/**
-	 * 获得屏幕宽度
-	 * 
-	 * @param context
-	 * @return
+	 * 获取屏幕的高度（单位：px）
+	 *
+	 * @param context 上下文
+	 * @return 屏幕高px
 	 */
 	public static int getScreenHeight(Context context) {
-		WindowManager wm = (WindowManager) context
-				.getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics outMetrics = new DisplayMetrics();
-		wm.getDefaultDisplay().getMetrics(outMetrics);
-		return outMetrics.heightPixels;
+		WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();// 创建了一张白纸
+		windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
+		return dm.heightPixels;
 	}
 
 	/**
-	 * 获得状态栏的高度
-	 * 
-	 * @param context
-	 * @return
+	 * 设置屏幕为横屏
+	 * <p>还有一种就是在Activity中加属性android:screenOrientation="landscape"</p>
+	 * <p>不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次</p>
+	 * <p>设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次</p>
+	 * <p>设置Activity的android:configChanges="orientation|keyboardHidden|screenSize"（4.0以上必须带最后一个参数）时
+	 * 切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法</p>
+	 *
+	 * @param activity activity
 	 */
-	public static int getStatusHeight(Context context) {
+	public static void setLandscape(Activity activity) {
+		activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+	}
 
-		int statusHeight = -1;
-		try {
-			Class<?> clazz = Class.forName("com.android.internal.R$dimen");
-			Object object = clazz.newInstance();
-			int height = Integer.parseInt(clazz.getField("status_bar_height")
-					.get(object).toString());
-			statusHeight = context.getResources().getDimensionPixelSize(height);
-		} catch (Exception e) {
-			e.printStackTrace();
+	/**
+	 * 设置屏幕为竖屏
+	 *
+	 * @param activity activity
+	 */
+	public static void setPortrait(Activity activity) {
+		activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
+
+	/**
+	 * 判断是否横屏
+	 *
+	 * @param context 上下文
+	 * @return {@code true}: 是<br>{@code false}: 否
+	 */
+	public static boolean isLandscape(Context context) {
+		return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+	}
+
+	/**
+	 * 判断是否竖屏
+	 *
+	 * @param context 上下文
+	 * @return {@code true}: 是<br>{@code false}: 否
+	 */
+	public static boolean isPortrait(Context context) {
+		return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+	}
+
+	/**
+	 * 获取屏幕旋转角度
+	 *
+	 * @param activity activity
+	 * @return 屏幕旋转角度
+	 */
+	public static int getScreenRotation(Activity activity) {
+		switch (activity.getWindowManager().getDefaultDisplay().getRotation()) {
+			default:
+			case Surface.ROTATION_0:
+				return 0;
+			case Surface.ROTATION_90:
+				return 90;
+			case Surface.ROTATION_180:
+				return 180;
+			case Surface.ROTATION_270:
+				return 270;
 		}
-		return statusHeight;
 	}
 
 	/**
 	 * 获取当前屏幕截图，包含状态栏
-	 * 
-	 * @param activity
-	 * @return
+	 *
+	 * @param activity activity
+	 * @return Bitmap
 	 */
-	public static Bitmap snapShotWithStatusBar(Activity activity) {
+	public static Bitmap captureWithStatusBar(Activity activity) {
 		View view = activity.getWindow().getDecorView();
 		view.setDrawingCacheEnabled(true);
 		view.buildDrawingCache();
 		Bitmap bmp = view.getDrawingCache();
-		int width = getScreenWidth(activity);
-		int height = getScreenHeight(activity);
-		Bitmap bp;
-		bp = Bitmap.createBitmap(bmp, 0, 0, width, height);
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		Bitmap ret = Bitmap.createBitmap(bmp, 0, 0, dm.widthPixels, dm.heightPixels);
 		view.destroyDrawingCache();
-		return bp;
-
+		return ret;
 	}
 
 	/**
 	 * 获取当前屏幕截图，不包含状态栏
-	 * 
-	 * @param activity
-	 * @return
+	 *
+	 * @param activity activity
+	 * @return Bitmap
 	 */
-	public static Bitmap snapShotWithoutStatusBar(Activity activity) {
+	public static Bitmap captureWithoutStatusBar(Activity activity) {
 		View view = activity.getWindow().getDecorView();
 		view.setDrawingCacheEnabled(true);
 		view.buildDrawingCache();
 		Bitmap bmp = view.getDrawingCache();
-		Rect frame = new Rect();
-		activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-		int statusBarHeight = frame.top;
-
-		int width = getScreenWidth(activity);
-		int height = getScreenHeight(activity);
-		Bitmap bp;
-		bp = Bitmap.createBitmap(bmp, 0, statusBarHeight, width, height - statusBarHeight);
+		int statusBarHeight = StatusBarUtils.getStatusBarHeight(activity);
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		Bitmap ret = Bitmap.createBitmap(bmp, 0, statusBarHeight, dm.widthPixels, dm.heightPixels - statusBarHeight);
 		view.destroyDrawingCache();
-		return bp;
+		return ret;
+	}
 
+	/**
+	 * 判断是否锁屏
+	 *
+	 * @param context 上下文
+	 * @return {@code true}: 是<br>{@code false}: 否
+	 */
+	public static boolean isScreenLock(Context context) {
+		KeyguardManager km = (KeyguardManager) context
+				.getSystemService(Context.KEYGUARD_SERVICE);
+		return km.inKeyguardRestrictedInputMode();
 	}
 
 }

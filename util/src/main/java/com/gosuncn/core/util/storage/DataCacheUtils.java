@@ -1,12 +1,11 @@
 package com.gosuncn.core.util.storage;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.PixelFormat;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import com.gosuncn.core.util.image.BitmapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -581,7 +580,7 @@ public class DataCacheUtils {
      *            保存的bitmap数据
      */
     public void put(String key, Bitmap value) {
-        put(key, Utils.Bitmap2Bytes(value));
+        put(key, BitmapUtils.bitmap2Bytes(value,Bitmap.CompressFormat.PNG,false));
     }
 
     /**
@@ -595,7 +594,7 @@ public class DataCacheUtils {
      *            保存的时间，单位：秒
      */
     public void put(String key, Bitmap value, int saveTime) {
-        put(key, Utils.Bitmap2Bytes(value), saveTime);
+        put(key, BitmapUtils.bitmap2Bytes(value,Bitmap.CompressFormat.PNG,false), saveTime);
     }
 
     /**
@@ -608,7 +607,7 @@ public class DataCacheUtils {
         if (getAsBinary(key) == null) {
             return null;
         }
-        return Utils.Bytes2Bitmap(getAsBinary(key));
+        return BitmapUtils.bytes2Bitmap(getAsBinary(key));
     }
 
     // =======================================
@@ -624,7 +623,7 @@ public class DataCacheUtils {
      *            保存的drawable数据
      */
     public void put(String key, Drawable value) {
-        put(key, Utils.drawable2Bitmap(value));
+        put(key, BitmapUtils.drawable2Bitmap(value));
     }
 
     /**
@@ -638,7 +637,7 @@ public class DataCacheUtils {
      *            保存的时间，单位：秒
      */
     public void put(String key, Drawable value, int saveTime) {
-        put(key, Utils.drawable2Bitmap(value), saveTime);
+        put(key, BitmapUtils.drawable2Bitmap(value), saveTime);
     }
 
     /**
@@ -647,11 +646,11 @@ public class DataCacheUtils {
      * @param key
      * @return Drawable 数据
      */
-    public Drawable getAsDrawable(String key) {
+    public Drawable getAsDrawable(Resources res, String key) {
         if (getAsBinary(key) == null) {
             return null;
         }
-        return Utils.bitmap2Drawable(Utils.Bytes2Bitmap(getAsBinary(key)));
+        return BitmapUtils.bitmap2Drawable(res,BitmapUtils.bytes2Bitmap(getAsBinary(key)));
     }
 
     /**
@@ -925,62 +924,6 @@ public class DataCacheUtils {
             return currentTime + "-" + second + mSeparator;
         }
 
-        /*
-         * Bitmap → byte[]
-         */
-        private static byte[] Bitmap2Bytes(Bitmap bm) {
-            if (bm == null) {
-                return null;
-            }
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-            return outputStream.toByteArray();
-        }
-
-        /*
-         * byte[] → Bitmap
-         */
-        private static Bitmap Bytes2Bitmap(byte[] b) {
-            if (b.length == 0) {
-                return null;
-            }
-            return BitmapFactory.decodeByteArray(b, 0, b.length);
-        }
-
-        /*
-         * Drawable → Bitmap
-         */
-        private static Bitmap drawable2Bitmap(Drawable drawable) {
-            if (drawable == null) {
-                return null;
-            }
-            // 取 drawable 的长宽
-            int w = drawable.getIntrinsicWidth();
-            int h = drawable.getIntrinsicHeight();
-            // 取 drawable 的颜色格式
-            Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
-            // 建立对应 bitmap
-            Bitmap bitmap = Bitmap.createBitmap(w, h, config);
-            // 建立对应 bitmap 的画布
-            Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(0, 0, w, h);
-            // 把 drawable 内容画到画布中
-            drawable.draw(canvas);
-            return bitmap;
-        }
-
-        /*
-         * Bitmap → Drawable
-         */
-        @SuppressWarnings("deprecation")
-        private static Drawable bitmap2Drawable(Bitmap bm) {
-            if (bm == null) {
-                return null;
-            }
-            BitmapDrawable bd = new BitmapDrawable(bm);
-            bd.setTargetDensity(bm.getDensity());
-            return new BitmapDrawable(bm);
-        }
     }
 
 }
