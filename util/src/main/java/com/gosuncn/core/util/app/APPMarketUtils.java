@@ -2,7 +2,6 @@ package com.gosuncn.core.util.app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 
@@ -28,8 +27,7 @@ public class APPMarketUtils {
      * @return
      */
     public static Intent getIntent(Context paramContext) {
-        StringBuilder localStringBuilder = new StringBuilder()
-                .append("market://details?id=");
+        StringBuilder localStringBuilder = new StringBuilder().append("market://details?id=");
         String str = paramContext.getPackageName();
         localStringBuilder.append(str);
         Uri localUri = Uri.parse(localStringBuilder.toString());
@@ -69,7 +67,7 @@ public class APPMarketUtils {
      * @return
      */
     public static boolean judge(Context paramContext, Intent paramIntent) {
-        List<ResolveInfo> localList = paramContext.getPackageManager().queryIntentActivities(paramIntent, PackageManager.GET_INTENT_FILTERS);
+        List<ResolveInfo> localList = paramContext.getPackageManager().queryIntentActivities(paramIntent, 0);
         return (localList != null) && (localList.size() > 0);
     }
 }

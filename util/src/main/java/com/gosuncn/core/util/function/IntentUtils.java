@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gosuncn.core.util.app;
+package com.gosuncn.core.util.function;
 
 import android.content.ComponentName;
 import android.content.Context;

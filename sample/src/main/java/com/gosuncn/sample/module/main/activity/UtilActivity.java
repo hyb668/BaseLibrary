@@ -4,6 +4,7 @@ import com.gosuncn.sample.R;
 import com.gosuncn.sample.common.SampleApplication;
 import com.gosuncn.sample.module.main.adapter.AnAdapter;
 import com.gosuncn.sample.module.util.activity.AppActivity;
+import com.gosuncn.sample.module.util.activity.FunctionActivity;
 
 public class UtilActivity extends AnActivity {
 
@@ -29,6 +30,9 @@ public class UtilActivity extends AnActivity {
             switch (position){
                 case 0:
                     gotoActivity(AppActivity.class);
+                    break;
+                case 8:
+                    gotoActivity(FunctionActivity.class);
                     break;
             }
         });

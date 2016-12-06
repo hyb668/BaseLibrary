@@ -16,7 +16,6 @@ package com.gosuncn.core.util.security;
 import android.util.Log;
 
 import com.gosuncn.core.util.convert.ConvertUtils;
-import com.gosuncn.core.util.convert.EncodeUtils;
 
 import java.security.SecureRandom;
 
@@ -52,7 +51,7 @@ public class DESUtils {
      * @return Base64密文
      */
     public static byte[] encryptDES2Base64(byte[] data, byte[] key) {
-        return EncodeUtils.base64Encode(encryptDES(data, key));
+        return Base64Utils.base64Encode(encryptDES(data, key));
     }
 
     /**
@@ -85,7 +84,7 @@ public class DESUtils {
      * @return 明文
      */
     public static byte[] decryptBase64DES(byte[] data, byte[] key) {
-        return decryptDES(EncodeUtils.base64Decode(data), key);
+        return decryptDES(Base64Utils.base64Decode(data), key);
     }
 
     /**
@@ -129,7 +128,7 @@ public class DESUtils {
      * @return Base64密文
      */
     public static byte[] encrypt3DES2Base64(byte[] data, byte[] key) {
-        return EncodeUtils.base64Encode(encrypt3DES(data, key));
+        return Base64Utils.base64Encode(encrypt3DES(data, key));
     }
 
     /**
@@ -162,7 +161,7 @@ public class DESUtils {
      * @return 明文
      */
     public static byte[] decryptBase64_3DES(byte[] data, byte[] key) {
-        return decrypt3DES(EncodeUtils.base64Decode(data), key);
+        return decrypt3DES(Base64Utils.base64Decode(data), key);
     }
 
     /**

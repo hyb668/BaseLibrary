@@ -1,5 +1,10 @@
 # BaseLibrary Releases
 
+### Util 1.2.2 - December 5th 2016
+
+* Update:ActivityManager,EncodeUtils,Base64Utils,AppUtils,DateUtils,MathUtils,PhoneUtils,CheckEmptyUtils,BitmapUtils,BlowfishUtils,CleanCacheUtils,DataCacheUtils,FileUtils,RegexUtils,StringsUtils,DialogUtils;
+* Move:CrashHelper,Handler,IntentUtils,ProcessUtils;
+
 ### Util 1.2.1 - December 2nd 2016
 
 * Add: ActivityUtils,ConstUtils,IntentUtils,ConvertUtils,MD2Utils,SHAUtils,EncodeUtils,ProcessUtils,CrashHelper,Handler,ClipboardUtils,DeviceUtils,ServiceUtils,ZipUtils,SnackbarUtils,ThreadPoolUtils;

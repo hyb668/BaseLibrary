@@ -21,6 +21,8 @@ import com.gosuncn.core.util.device.SDCardUtils;
 
 import java.io.File;
 
+import static com.gosuncn.core.util.storage.FileUtils.deleteDir;
+
 /**
  * 缓存清理工具类
  */
@@ -145,19 +147,6 @@ public class CleanCacheUtils {
         }
     }
 
-    private static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-        }
-        return dir.delete();
-    }
-
     /**
      * 获得缓存大小
      *
@@ -165,7 +154,7 @@ public class CleanCacheUtils {
      * @return
      * @throws Exception
      */
-    public static String getCacheSize(File file) throws Exception {
+    public static String getCacheSize(File file) {
         return ConvertUtils.byte2FitSize(FileUtils.getFileOrDirSize(file));
     }
 
@@ -176,7 +165,7 @@ public class CleanCacheUtils {
      * @return
      * @throws Exception
      */
-    public static String getTotalCacheSize(Context context) throws Exception {
+    public static String getTotalCacheSize(Context context) {
         long cacheSize = FileUtils.getFileOrDirSize(context.getCacheDir());
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {

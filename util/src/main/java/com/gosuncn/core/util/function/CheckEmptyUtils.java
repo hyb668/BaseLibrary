@@ -84,8 +84,4 @@ public class CheckEmptyUtils {
         return reference;
     }
 
-    public static String keepStringNotNull(String s) {
-        return s == null ? "" : s;
-    }
-
 }

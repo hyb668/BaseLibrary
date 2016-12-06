@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.widget.Button;
 import android.widget.TextView;
-import com.gosuncn.core.util.app.Handler;
+import com.gosuncn.core.util.function.Handler;
 import com.gosuncn.sample.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;

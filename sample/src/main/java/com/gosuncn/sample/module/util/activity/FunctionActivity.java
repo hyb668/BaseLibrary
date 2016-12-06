@@ -5,10 +5,10 @@ import com.gosuncn.sample.common.SampleApplication;
 import com.gosuncn.sample.module.main.activity.AnActivity;
 import com.gosuncn.sample.module.main.adapter.AnAdapter;
 
-public class AppActivity extends AnActivity {
+public class FunctionActivity extends AnActivity {
 
-    private final String ACTIVITY_UTILS = SampleApplication.getAppContext().getResources().getString(R.string.activity_utils);
-    private String[] itemTitle = new String[]{ACTIVITY_UTILS};
+    private final String HANDLER = SampleApplication.getAppContext().getResources().getString(R.string.handler);
+    private String[] itemTitle = new String[]{HANDLER};
 
     @Override
     protected void initViews() {
@@ -20,7 +20,7 @@ public class AppActivity extends AnActivity {
         adapter.setOnItemClickListener((v, position) -> {
             switch (position){
                 case 0:
-                    gotoActivity(ActivityUtilsActivity.class);
+                    gotoActivity(HandlerActivity.class);
                     break;
             }
         });

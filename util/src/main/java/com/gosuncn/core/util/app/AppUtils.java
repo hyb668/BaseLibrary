@@ -26,6 +26,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.gosuncn.core.util.device.ShellUtils;
+import com.gosuncn.core.util.function.IntentUtils;
+import com.gosuncn.core.util.function.ProcessUtils;
 import com.gosuncn.core.util.security.hash.SHAUtils;
 import com.gosuncn.core.util.storage.FileUtils;
 import com.gosuncn.core.util.string.StringUtils;
@@ -615,7 +617,7 @@ public class AppUtils {
         }
 
         public void setUid(int uid) {
-            uid = uid;
+            this.uid = uid;
         }
 
         /**

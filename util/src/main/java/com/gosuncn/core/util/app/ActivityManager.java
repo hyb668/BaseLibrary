@@ -10,6 +10,7 @@ import java.util.Stack;
  * @author HWJ
  */
 public class ActivityManager {
+
     private static Stack<Activity> activityStack;
     private static ActivityManager instance;
 
@@ -37,7 +38,6 @@ public class ActivityManager {
         if (activity != null) {
             activity.finish();
             activityStack.remove(activity);
-            activity = null;
         }
     }
 

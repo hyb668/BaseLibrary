@@ -112,7 +112,9 @@ public class DataCacheUtils {
 
         public void close() throws IOException {
             super.close();
-            mCache.put(file);
+            if(file!=null) {
+                mCache.put(file);
+            }
         }
     }
 
@@ -359,8 +361,7 @@ public class DataCacheUtils {
     public JSONArray getAsJSONArray(String key) {
         String JSONString = getAsString(key);
         try {
-            JSONArray obj = new JSONArray(JSONString);
-            return obj;
+            return new JSONArray(JSONString);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -522,11 +523,7 @@ public class DataCacheUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                oos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            FileUtils.closeIO(oos);
         }
     }
 

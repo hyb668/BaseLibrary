@@ -28,7 +28,7 @@ public class MathUtils {
    */
   public static String byte2HexStr(byte[] b, int length){
     String hs = "";
-    String tmp = "";
+    String tmp;
     for (int n = 0; n < length; ++n) {
       tmp = Integer.toHexString(b[n] & 0xFF);
       if (tmp.length() == 1)
@@ -48,7 +48,7 @@ public class MathUtils {
    * @return char hex
    */
 	public static char binaryToHex(int binary) {
-		char ch = ' ';
+		char ch;
 		switch (binary){
 		case 0:
 			ch = '0';
@@ -276,15 +276,16 @@ public class MathUtils {
     public  static boolean LineOnLine(double x1,double y1,double x2,double y2,double x3,double y3,double x4,double y4){
 	    double k1 = ( y2-y1 )/(x2-x1);
 	    double k2 = ( y4-y3 )/(x4-x3);
-		if(k1==k2){
+		/*if(k1==k2){
 			//System.out.println("平行线");
 			return false;
 		}else{
-		  double x = ((x1*y2-y1*x2)*(x3-x4)-(x3*y4-y3*x4)*(x1-x2))/((y2-y1)*(x3-x4)-(y4-y3)*(x1-x2));
-		  double y = ( x1*y2-y1*x2 - x*(y2-y1) ) / (x1-x2);
-		  //System.out.println("直线的交点("+x+","+y+")");
-		  return true;
-		}
+			//double x = ((x1*y2-y1*x2)*(x3-x4)-(x3*y4-y3*x4)*(x1-x2))/((y2-y1)*(x3-x4)-(y4-y3)*(x1-x2));
+			//double y = ( x1*y2-y1*x2 - x*(y2-y1) ) / (x1-x2);
+			//System.out.println("直线的交点("+x+","+y+")");
+			return true;
+		}*/
+		return k1 != k2;
 	}
     
     /**

@@ -56,7 +56,9 @@ public class DialogUtils {
         }
         AlertDialog alertDialog = promptBuilder.create();
         if (!(context instanceof Activity)) {
-            alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+            if(alertDialog.getWindow()!=null){
+                alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+            }
         }
         alertDialog.setOnDismissListener(onDismissListener);
         alertDialog.setOnShowListener(onShowListener);

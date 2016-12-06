@@ -168,7 +168,7 @@ public class RegexUtils {
      * @return 验证成功返回true，验证失败返回false
      */
     public static boolean checkIpPort(String port) {
-        int iPort = 0;
+        int iPort;
         try {
             iPort = Integer.parseInt(port);
         } catch (Exception e) {

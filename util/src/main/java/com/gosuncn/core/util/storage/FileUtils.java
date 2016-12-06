@@ -1285,6 +1285,7 @@ public class FileUtils {
         return bytes2HexString(getFileMD5(file));
     }
 
+
     /**
      * 获取文件的MD5校验码
      *

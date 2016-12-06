@@ -230,7 +230,7 @@ public class BitmapUtils {
         float scale = getMinScale(srcWidth, srcHeight, desiredWidth, desiredHeight);
         resizeBmp = getScaleBitmap(bitmap, scale);
         //超出的裁掉
-        if (resizeBmp.getWidth() > desiredWidth || resizeBmp.getHeight() > desiredHeight) {
+        if ( resizeBmp != null && (resizeBmp.getWidth() > desiredWidth || resizeBmp.getHeight() > desiredHeight)) {
             resizeBmp  = getCutBitmap(resizeBmp,desiredWidth,desiredHeight);
         }
         return resizeBmp;
@@ -347,7 +347,7 @@ public class BitmapUtils {
 
     private static float getMinScale(int srcWidth, int srcHeight, int desiredWidth, int desiredHeight) {
         // 缩放的比例
-        float scale = 0;
+        float scale;
         // 计算缩放比例，宽高的最小比例
         float scaleWidth = (float) desiredWidth / srcWidth;
         float scaleHeight = (float) desiredHeight / srcHeight;
@@ -541,7 +541,6 @@ public class BitmapUtils {
             bitmap.compress(mCompressFormat, 100, output);
             byte[] result = output.toByteArray();
             size = result.length;
-            result = null;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -803,14 +802,12 @@ public class BitmapUtils {
         if (bitmap != null) {
             try {
                 if (!bitmap.isRecycled()) {
-                    Log.d(""+ImageUtils.class,
-                            "Bitmap释放" + bitmap.toString());
+                    Log.d(""+ImageUtils.class, "Bitmap释放" + bitmap.toString());
                     bitmap.recycle();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            bitmap = null;
         }
     }
 
@@ -929,7 +926,7 @@ public class BitmapUtils {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 int pixels = bitmap.getPixel(i, j);
-                int alpha = (pixels >> 24) & 0xFF;
+                //int alpha = (pixels >> 24) & 0xFF;
                 int red = (pixels >> 16) & 0xFF;
                 int green = (pixels >> 8) & 0xFF;
                 int blue = (pixels) & 0xFF;
@@ -984,7 +981,6 @@ public class BitmapUtils {
         if (bitmap != null && !bitmap.isRecycled()) {
             // 回收并且置为null
             bitmap.recycle();
-            bitmap = null;
         }
         System.gc();
     }
@@ -1064,7 +1060,7 @@ public class BitmapUtils {
         int w = options.outWidth;
         int beWidth = w / width;
         int beHeight = h / height;
-        int be = 1;
+        int be;
         if (beWidth < beHeight) {
             be = beWidth;
         } else {

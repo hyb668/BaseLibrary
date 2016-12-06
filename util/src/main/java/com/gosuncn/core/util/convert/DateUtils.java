@@ -285,7 +285,7 @@ public class DateUtils {
      * @return
      */
     public static String getDetailTime(long timeStamp) {
-        String result = "";
+        String result;
         SimpleDateFormat sdf = new SimpleDateFormat("dd");
         Date today = new Date(System.currentTimeMillis());
         Date otherDay = new Date(timeStamp);
@@ -302,7 +302,6 @@ public class DateUtils {
             case 2:
                 result = "前天 " + getHourAndMin(timeStamp);
                 break;
-
             default:
                 result = getTime(timeStamp);
                 break;

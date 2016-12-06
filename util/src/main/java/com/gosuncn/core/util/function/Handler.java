@@ -1,4 +1,4 @@
-package com.gosuncn.core.util.app;
+package com.gosuncn.core.util.function;
 
 import android.os.Message;
 

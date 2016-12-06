@@ -1368,17 +1368,16 @@ public class BlowfishUtils {
 
         String password = key == null ? DEFAULT_KEY : key;
         // hash down the password to a 160bit key
-        MessageDigest digest = null;
+        MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA1");
             digest.update(password.getBytes());
+            // setup the encryptor (use a dummy IV)
+            mBlowfish = new BlowfishCBC(digest.digest(), 0);
+            digest.reset();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // setup the encryptor (use a dummy IV)
-        mBlowfish = new BlowfishCBC(digest.digest(), 0);
-        digest.reset();
     }
 
 
