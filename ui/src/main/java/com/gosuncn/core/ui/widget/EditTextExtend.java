@@ -153,10 +153,8 @@ public class EditTextExtend extends AppCompatEditText implements View.OnTouchLis
         if (drawable != null && drawable.isVisible() && x > getWidth()-getPaddingRight()-drawableSize) {
             if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                 if(listener != null){
-                    int selectionStart = getSelectionStart();
-                    int selectionEnd = getSelectionEnd();
                     listener.onClick();
-                    setSelection(selectionStart, selectionEnd);
+                    setSelection(getText().length());
                 }
             }
             return true;

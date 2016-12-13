@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### UI 1.1.2 - December 13rd 2016
+
+* Fix:EditTextExtend;
+
 ### UI 1.1.1 - December 9th 2016
 
 * Update:ToolbarExtend,EditTextExtend;
