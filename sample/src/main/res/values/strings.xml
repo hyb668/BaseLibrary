@@ -28,7 +28,7 @@
     <string name="recycler_view_grid_space">RecyclerViewGridSpace</string>
     <string name="recycler_view_linear_space">RecyclerViewLinearSpace</string>
     <string name="resize_drawable_checkbox">ResizeDrawableCheckBox</string>
-    <string name="resize_drawable_edit_text">ResizeDrawableEditText</string>
+    <string name="edit_text_extend">EditTextExtend</string>
 
     <!--  View -->
     <string name="blur_frame_layout">BlurFrameLayout</string>

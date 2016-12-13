@@ -13,10 +13,10 @@ public class WidgetActivity extends AnActivity {
     private final String RECYCLER_VIEW_GRID_SPACE = SampleApplication.getAppContext().getResources().getString(R.string.recycler_view_grid_space);
     private final String RECYCLER_VIEW_LINEAR_SPACE = SampleApplication.getAppContext().getResources().getString(R.string.recycler_view_linear_space);
     private final String RESIZE_DRAWABLE_CHECKBOX = SampleApplication.getAppContext().getResources().getString(R.string.resize_drawable_checkbox);
-    private final String RESIZE_DRAWABLE_EDITTEXT = SampleApplication.getAppContext().getResources().getString(R.string.resize_drawable_edit_text);
+    private final String EDIT_TEXT_EXTEND = SampleApplication.getAppContext().getResources().getString(R.string.edit_text_extend);
     private String[] itemTitle = new String[]{CIRCLE_IMAGE_VIEW,CUSTOM_TOOLBAR,RECYCLER_VIEW_DIVIDER,
                         RECYCLER_VIEW_GRID_SPACE,RECYCLER_VIEW_LINEAR_SPACE,RESIZE_DRAWABLE_CHECKBOX,
-                        RESIZE_DRAWABLE_EDITTEXT};
+                        EDIT_TEXT_EXTEND};
 
     @Override
     protected void initViews() {
@@ -31,7 +31,7 @@ public class WidgetActivity extends AnActivity {
                     gotoActivity(CircleImageViewActivity.class);
                     break;
                 case 1:
-                    gotoActivity(CustomToolbarActivity.class);
+                    gotoActivity(ToolbarExtendActivity.class);
                     break;
                 case 2:
                     gotoActivity(RecyclerViewDividerActivity.class);
@@ -46,7 +46,7 @@ public class WidgetActivity extends AnActivity {
                     gotoActivity(ResizeDrawableCheckBoxActivity.class);
                     break;
                 case 6:
-                    gotoActivity(ResizeDrawableEditTextActivity.class);
+                    gotoActivity(EditTextExtendActivity.class);
                     break;
             }
         });

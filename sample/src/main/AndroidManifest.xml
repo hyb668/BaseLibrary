@@ -39,7 +39,7 @@
             android:name=".module.ui.activity.CircleImageViewActivity"
             android:label="@string/circle_image_view" />
         <activity
-            android:name=".module.ui.activity.CustomToolbarActivity"
+            android:name=".module.ui.activity.ToolbarExtendActivity"
             android:label="@string/custom_toolbar" />
         <activity
             android:name=".module.ui.activity.RecyclerViewDividerActivity"
@@ -54,8 +54,8 @@
             android:name=".module.ui.activity.ResizeDrawableCheckBoxActivity"
             android:label="@string/resize_drawable_checkbox" />
         <activity
-            android:name=".module.ui.activity.ResizeDrawableEditTextActivity"
-            android:label="@string/resize_drawable_edit_text" />
+            android:name=".module.ui.activity.EditTextExtendActivity"
+            android:label="@string/edit_text_extend" />
         <!-- Widget end -->
 
 
@@ -79,15 +79,22 @@
         <activity
             android:name=".module.util.activity.AppActivity"
             android:label="@string/m_app" />
+        <activity
+            android:name=".module.util.activity.FunctionActivity"
+            android:label="@string/function" />
 
         <!-- App  start -->
         <activity
             android:name=".module.util.activity.ActivityUtilsActivity"
             android:label="@string/activity_utils"/>
+        <!-- App  end -->
+
+        <!-- Function  start -->
         <activity
             android:name=".module.util.activity.HandlerActivity"
             android:label="@string/handler"/>
-        <!-- App  end -->
+
+        <!-- Function  end -->
 
 
         <!-- Util  end -->

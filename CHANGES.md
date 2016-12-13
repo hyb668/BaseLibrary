@@ -1,5 +1,16 @@
 # BaseLibrary Releases
 
+### UI 1.1.1 - December 9th 2016
+
+* Update:ToolbarExtend,EditTextExtend;
+* Add:DepthPageTransformer,ZoomOutPageTransformer,AutoCompleteTextViewExtend,RecyclerViewExtend,SwipeRefreshLayoutExtend;
+* Delete:ResizeDrawableEditText;
+
+### Util 1.3.2 - December 6th 2016
+
+* Update:StringUtils;
+* Delete:EncodeUtils;
+
 ### Util 1.2.2 - December 5th 2016
 
 * Update:ActivityManager,EncodeUtils,Base64Utils,AppUtils,DateUtils,MathUtils,PhoneUtils,CheckEmptyUtils,BitmapUtils,BlowfishUtils,CleanCacheUtils,DataCacheUtils,FileUtils,RegexUtils,StringsUtils,DialogUtils;

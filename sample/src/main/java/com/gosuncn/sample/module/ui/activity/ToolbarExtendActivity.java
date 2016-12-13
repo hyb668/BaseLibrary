@@ -2,32 +2,49 @@ package com.gosuncn.sample.module.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
 
-import com.gosuncn.core.ui.widget.ResizeDrawableEditText;
+import com.gosuncn.core.ui.widget.ToolbarExtend;
 import com.gosuncn.sample.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ResizeDrawableEditTextActivity extends AppCompatActivity {
+public class ToolbarExtendActivity extends AppCompatActivity {
 
-    @BindView(R.id.et)
-    ResizeDrawableEditText et;
+    @BindView(R.id.toolbar)
+    ToolbarExtend toolbar;
+    @BindView(R.id.rg_gravity)
+    RadioGroup rgGravity;
     @BindView(R.id.rg_size)
     RadioGroup rgSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resize_drawable_edit_text);
+        setContentView(R.layout.activity_toolbar_extend);
         ButterKnife.bind(this);
         initViews();
     }
 
     private void initViews() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        rgGravity.setOnCheckedChangeListener((radioGroup, i) -> {
+            switch (i){
+                case R.id.rb_left:
+                    setGravity(Gravity.LEFT);
+                    break;
+                case R.id.rb_center:
+                    setGravity(Gravity.CENTER);
+                    break;
+                case R.id.rb_right:
+                    setGravity(Gravity.RIGHT);
+                    break;
+            }
+        });
+        rgGravity.check(R.id.rb_left);
         rgSize.setOnCheckedChangeListener((radioGroup, i) -> {
             switch (i){
                 case R.id.rb_16:
@@ -53,8 +70,12 @@ public class ResizeDrawableEditTextActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void setGravity(int gravity) {
+        toolbar.setTitleGravity(gravity);
+    }
+
     private void setSize(int size) {
-        et.setDrawableSize(getResources().getDimensionPixelSize(size));
+        toolbar.setDrawableSize(getResources().getDimensionPixelSize(size));
     }
 
 }

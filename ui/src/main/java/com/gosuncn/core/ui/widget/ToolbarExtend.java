@@ -32,22 +32,22 @@ import com.gosuncn.core.ui.R;
  * 自定义Toolbar
  * todo: 修复title在left和right的margin
  */
-public class CustomToolbar extends Toolbar {
+public class ToolbarExtend extends Toolbar {
 
     private final int DEFAULT_SIZE = 24;
     private int drawableSize;
     private final int DEFAULT_GRAVITY = GravityCompat.START | Gravity.CENTER_VERTICAL;
     private int titleGravity;
 
-    public CustomToolbar(Context context) {
+    public ToolbarExtend(Context context) {
         this(context,null);
     }
 
-    public CustomToolbar(Context context, @Nullable AttributeSet attrs) {
+    public ToolbarExtend(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CustomToolbar);
-        drawableSize = a.getDimensionPixelSize(R.styleable.CustomToolbar_drawableSize,DEFAULT_SIZE);
-        titleGravity = a.getInt(R.styleable.CustomToolbar_titleGravity,DEFAULT_GRAVITY);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ToolbarExtend);
+        drawableSize = a.getDimensionPixelSize(R.styleable.ToolbarExtend_drawableSize,DEFAULT_SIZE);
+        titleGravity = a.getInt(R.styleable.ToolbarExtend_titleGravity,DEFAULT_GRAVITY);
 
         a.recycle();
 
@@ -71,7 +71,7 @@ public class CustomToolbar extends Toolbar {
 
         Drawable buttonDrawable = getNavigationIcon();
         if(buttonDrawable != null){
-            CustomToolbar.ResizeDrawable drawable = new CustomToolbar.ResizeDrawable(buttonDrawable,drawableSize);
+            ResizeDrawable drawable = new ResizeDrawable(buttonDrawable,drawableSize);
             setNavigationIcon(drawable);
         }
 
@@ -94,7 +94,7 @@ public class CustomToolbar extends Toolbar {
         for(int i = 0; i < getChildCount(); i++){
             View view = getChildAt(i);
             if(view != null && view instanceof TextView){
-                Toolbar.LayoutParams lp = new Toolbar.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 lp.gravity = titleGravity;
                 view.setLayoutParams(lp);
             }

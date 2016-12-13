@@ -6,49 +6,21 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    tools:context="com.gosuncn.sample.module.ui.activity.CustomToolbarActivity">
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    tools:context="com.gosuncn.sample.module.ui.activity.EditTextExtendActivity">
 
-    <com.gosuncn.core.ui.widget.CustomToolbar
-        android:id="@+id/toolbar"
+    <com.gosuncn.core.ui.widget.EditTextExtend
+        android:id="@+id/et"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimaryDark"
-        app:title="Title"
-        app:titleGravity="left"
-        app:navigationIcon="@drawable/ic_woo"
-        app:drawableSize="@dimen/dp_48" />
-
-    <RadioGroup
-        android:id="@+id/rg_gravity"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/dp_48">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="titleGravity: "/>
-
-        <RadioButton
-            android:id="@+id/rb_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="left"/>
-        <RadioButton
-            android:id="@+id/rb_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="center"/>
-        <RadioButton
-            android:id="@+id/rb_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="right"/>
-
-    </RadioGroup>
+        android:drawableLeft="@drawable/ic_woo"
+        android:drawableRight="@drawable/vector_visibility"
+        app:drawableSize="@dimen/dp_16"
+        app:hasTextShow="true"
+        android:drawablePadding="@dimen/dp_16"
+        android:inputType="textPassword"
+        android:hint="@string/edit_text_extend"/>
 
     <RadioGroup
         android:id="@+id/rg_size"

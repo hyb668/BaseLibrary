@@ -25,13 +25,13 @@ public class AnAdapter extends BaseRecyclerViewAdapter<AnAdapter.ViewHolder> {
     }
 
     @Override
-    public AnAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(AnAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvItem.setText(itemTitle[position]);
     }
 
