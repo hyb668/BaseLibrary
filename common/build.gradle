@@ -3,18 +3,17 @@ apply plugin: 'com.android.library'// 应用Android plugin
 def cfg = rootProject.ext.configuration
 def lib = rootProject.ext.libraries
 
+version = '1.1.0'
+
 android {
     compileSdkVersion cfg.compileSdkVersion
     buildToolsVersion cfg.buildToolsVersion
 
-    dataBinding{
-        enabled=true
-    }
     defaultConfig {
         minSdkVersion cfg.minSdkVersion
         targetSdkVersion cfg.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName project.version
     }
     compileOptions {
         sourceCompatibility cfg.javaCompatibility //源码兼容版本
@@ -37,8 +36,6 @@ dependencies {
 
 // Create source/javadoc artifacts for publishing
 apply from: "$rootDir/gradle/artifacts.gradle"
-
-version = "1.0.0"
 
 // Configure android-maven-gradle-plugin
 install {

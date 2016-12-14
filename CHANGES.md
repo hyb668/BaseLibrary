@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### Common 1.1.0 - December 14th 2016
+
+* Add:SimpleSubscriber;
+
 ### UI 1.1.2 - December 13rd 2016
 
 * Fix:EditTextExtend;
