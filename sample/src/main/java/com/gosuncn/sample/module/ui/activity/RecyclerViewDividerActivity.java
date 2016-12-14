@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gosuncn.core.ui.widget.RecyclerViewDivider;
+import com.gosuncn.core.ui.widget.RecyclerViewLinearDivider;
 import com.gosuncn.sample.R;
 import com.gosuncn.sample.module.ui.adapter.UIAdapter;
 
@@ -21,7 +21,7 @@ public class RecyclerViewDividerActivity extends AppCompatActivity {
 
     String[] strs;
     LinearLayoutManager layoutManager;
-    RecyclerViewDivider divider;
+    RecyclerViewLinearDivider divider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class RecyclerViewDividerActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);//优化布局性能
         layoutManager = new LinearLayoutManager(rv.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        divider = new RecyclerViewDivider(this,RecyclerViewDivider.VERTICAL_LIST);
+        divider = new RecyclerViewLinearDivider(this,RecyclerViewLinearDivider.VERTICAL_LIST);
         rv.addItemDecoration(divider);
         rv.setLayoutManager(layoutManager);
     }
@@ -69,11 +69,11 @@ public class RecyclerViewDividerActivity extends AppCompatActivity {
                 break;
             case R.id.action_vertical:
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                divider.setOrientation(RecyclerViewDivider.VERTICAL_LIST);
+                divider.setOrientation(RecyclerViewLinearDivider.VERTICAL_LIST);
                 break;
             case R.id.action_horizontal:
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                divider.setOrientation(RecyclerViewDivider.HORIZONTAL_LIST);
+                divider.setOrientation(RecyclerViewLinearDivider.HORIZONTAL_LIST);
                 divider.setWidth(10);
                 break;
         }

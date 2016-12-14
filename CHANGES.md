@@ -5,8 +5,9 @@ Common 1.1.1
 * Add:SimpleSubscriber;
 * Fix:SimpleSubscriber;
 
-UI 1.1.3
+UI 1.1.5
 * Fix:DisableScrollViewPager;
+* Add:RecyclerViewGridDivider;
 
 ### UI 1.1.2 - December 13rd 2016
 
