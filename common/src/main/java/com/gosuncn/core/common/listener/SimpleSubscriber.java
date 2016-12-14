@@ -26,8 +26,6 @@ import rx.Subscriber;
  */
 public abstract class SimpleSubscriber<T> extends Subscriber<T> {
 
-    public static final String TAG = "Subscriber";
-
     private Activity context;
 
     public SimpleSubscriber(Activity context) {

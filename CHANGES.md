@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### Common 1.1.1 - December 14th 2016
+
+* Fix:SimpleSubscriber;
+
 ### Common 1.1.0 - December 14th 2016
 
 * Add:SimpleSubscriber;
