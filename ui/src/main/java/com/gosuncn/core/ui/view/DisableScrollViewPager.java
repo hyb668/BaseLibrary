@@ -35,14 +35,6 @@ public class DisableScrollViewPager extends ViewPager {
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if(!scrollable){
-            return true;
-        }
-        return super.onInterceptTouchEvent(ev);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if(!scrollable){
             return true;

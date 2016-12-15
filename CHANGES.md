@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### December 15th 2016
+UI 1.1.6
+* Fix:DisableScrollViewPager;
+
 ### December 14th 2016
 Common 1.1.1
 * Add:SimpleSubscriber;
