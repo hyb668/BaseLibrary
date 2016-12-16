@@ -1,6 +1,10 @@
 # BaseLibrary Releases
 
 ### December 15th 2016
+UI 1.1.7
+* Fix:DisableScrollViewPager;
+
+### December 15th 2016
 UI 1.1.6
 * Fix:DisableScrollViewPager;
 
