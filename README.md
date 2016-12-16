@@ -1,7 +1,5 @@
 # BaseLibrary: Base Library for Android
 
-#### 目标：write once,use anywhere
-
 Android基本库，现在分为common、util和ui,主要包含`adapter`、`base`、`event`、`listener`，`logger`，`util`，`widget`，这个基本库集合了一般Android项目所需的公共类，可直接导入使用，加快项目开发。
 
 ## Communication
