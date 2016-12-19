@@ -4,6 +4,9 @@
 Common 1.1.2
 * Fix:UrlInterceptor;
 
+UI 1.1.8
+* Fix:EditTextExtend;
+
 ### December 16th 2016
 UI 1.1.7
 * Fix:DisableScrollViewPager;

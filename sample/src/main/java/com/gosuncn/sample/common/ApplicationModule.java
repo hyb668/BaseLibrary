@@ -48,9 +48,10 @@ public class ApplicationModule {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
-                .addNetworkInterceptor(interceptor)
-                .connectTimeout(5, TimeUnit.MINUTES)
-                .readTimeout(5, TimeUnit.MINUTES)
+                .addInterceptor(interceptor)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30,TimeUnit.SECONDS)
                 .build();
 
         String baseUrl = "http://"+ Config.IpConfig.IP_ADDRESS+":"+Config.IpConfig.PORT+"/";

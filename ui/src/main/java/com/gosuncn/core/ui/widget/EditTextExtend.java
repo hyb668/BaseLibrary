@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,8 +49,8 @@ public class EditTextExtend extends AppCompatEditText implements View.OnTouchLis
     public EditTextExtend(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.EditTextExtend);
-        drawableSize = a.getDimensionPixelSize(R.styleable.EditTextExtend_drawableSize,DEFAULT_SIZE);
-        hasTextShow = a.getBoolean(R.styleable.EditTextExtend_hasTextShow,false);
+        drawableSize = a.getDimensionPixelSize(R.styleable.EditTextExtend_drawableSize, DEFAULT_SIZE);
+        hasTextShow = a.getBoolean(R.styleable.EditTextExtend_hasTextShow, false);
 
         a.recycle();
 
@@ -63,25 +64,35 @@ public class EditTextExtend extends AppCompatEditText implements View.OnTouchLis
 
     protected void showRightIcon() {
         final Drawable[] drawables = getCompoundDrawables();
-        if(hasTextShow) {
-            if (drawables[2] != null ) {
+        if (hasTextShow) {
+            if (drawables[2] != null) {
                 if (getText().length() <= 0) {
                     super.setCompoundDrawables(drawables[0], drawables[1], null, drawables[3]);
                 }
                 addTextChangedListener(new SimpleTextWatcher() {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (s.length() > 0) {
-                            EditTextExtend.super.setCompoundDrawables(drawables[0], drawables[1], rightIcon, drawables[3]);
-                        } else {
-                            EditTextExtend.super.setCompoundDrawables(drawables[0], drawables[1], null, drawables[3]);
-                        }
+                    setVisible(s.length()>0,drawables);
+                    }
+                });
+                setOnFocusChangeListener(new OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        setVisible(hasFocus&&!TextUtils.isEmpty(getText()),drawables);
                     }
                 });
             }
-        }else {
+        } else {
             addTextChangedListener(null);
             EditTextExtend.super.setCompoundDrawables(drawables[0], drawables[1], rightIcon, drawables[3]);
+        }
+    }
+
+    private void setVisible(boolean visible, Drawable[] drawables) {
+        if (visible) {
+            super.setCompoundDrawables(drawables[0], drawables[1], rightIcon, drawables[3]);
+        } else {
+            super.setCompoundDrawables(drawables[0], drawables[1], null, drawables[3]);
         }
     }
 
@@ -107,52 +118,52 @@ public class EditTextExtend extends AppCompatEditText implements View.OnTouchLis
         showRightIcon();
     }
 
-    public void setOnRightIconClickListener(OnRightIconClickListener listener){
+    public void setOnRightIconClickListener(OnRightIconClickListener listener) {
         this.listener = listener;
     }
 
-    protected void resizeDrawable(){
+    protected void resizeDrawable() {
         Drawable[] compoundDrawables = getCompoundDrawables();
         for (Drawable compoundDrawable : compoundDrawables) {
-            if(compoundDrawable != null){
-                compoundDrawable.setBounds(0,0,drawableSize,drawableSize);
+            if (compoundDrawable != null) {
+                compoundDrawable.setBounds(0, 0, drawableSize, drawableSize);
             }
         }
-        if(rightIcon != null){
-            rightIcon.setBounds(0,0,drawableSize,drawableSize);
+        if (rightIcon != null) {
+            rightIcon.setBounds(0, 0, drawableSize, drawableSize);
         }
-        super.setCompoundDrawables(compoundDrawables[0],compoundDrawables[1],compoundDrawables[2],compoundDrawables[3]);
+        super.setCompoundDrawables(compoundDrawables[0], compoundDrawables[1], compoundDrawables[2], compoundDrawables[3]);
 
     }
 
-    public void setRightIcon(Drawable drawable){
+    public void setRightIcon(Drawable drawable) {
         rightIcon = drawable;
-        if(rightIcon != null){
-            rightIcon.setBounds(0,0,drawableSize,drawableSize);
+        if (rightIcon != null) {
+            rightIcon.setBounds(0, 0, drawableSize, drawableSize);
         }
     }
 
     @Override
     public void setCompoundDrawables(Drawable left, Drawable top, Drawable right, Drawable bottom) {
-        Drawable[] compoundDrawables = new Drawable[]{left,top,right,bottom};
+        Drawable[] compoundDrawables = new Drawable[]{left, top, right, bottom};
         for (Drawable compoundDrawable : compoundDrawables) {
-            if(compoundDrawable != null){
-                compoundDrawable.setBounds(0,0,drawableSize,drawableSize);
+            if (compoundDrawable != null) {
+                compoundDrawable.setBounds(0, 0, drawableSize, drawableSize);
             }
         }
 
         rightIcon = compoundDrawables[2];
 
-        super.setCompoundDrawables(compoundDrawables[0],compoundDrawables[1],rightIcon,compoundDrawables[3]);
+        super.setCompoundDrawables(compoundDrawables[0], compoundDrawables[1], rightIcon, compoundDrawables[3]);
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         final int x = (int) motionEvent.getX();
         Drawable drawable = getCompoundDrawables()[2];
-        if (drawable != null && drawable.isVisible() && x > getWidth()-getPaddingRight()-drawableSize) {
+        if (drawable != null && drawable.isVisible() && x > getWidth() - getPaddingRight() - drawableSize) {
             if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                if(listener != null){
+                if (listener != null) {
                     listener.onClick();
                     setSelection(getText().length());
                 }
