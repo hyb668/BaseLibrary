@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### December 19th 2016
+Common 1.1.2
+* Fix:UrlInterceptor;
+
 ### December 16th 2016
 UI 1.1.7
 * Fix:DisableScrollViewPager;

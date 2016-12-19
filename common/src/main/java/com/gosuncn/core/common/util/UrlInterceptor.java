@@ -56,7 +56,7 @@ public class UrlInterceptor implements Interceptor {
                         .host(host)
                         .build();
             }
-            if (!TextUtils.isEmpty(host)) {
+            if (!TextUtils.isEmpty(port)) {
                 newUrl = newUrl.newBuilder()
                         .port(Integer.parseInt(port))
                         .build();
