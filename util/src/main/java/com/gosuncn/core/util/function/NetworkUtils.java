@@ -250,7 +250,6 @@ public class NetworkUtils {
      * @param context
      * @return
      */
-    @RequiresPermission(ACCESS_WIFI_STATE)
     public static int getWifiState(Context context) {
         WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
@@ -276,7 +275,6 @@ public class NetworkUtils {
      * @param password
      * @return
      */
-    @RequiresPermission(allOf = {ACCESS_WIFI_STATE,CHANGE_WIFI_STATE})
     public static boolean wifiConnection(Context context, String wifiSSID,
                                          String password) {
         boolean isConnection = false;

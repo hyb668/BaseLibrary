@@ -90,7 +90,6 @@ public class LocationUtils {
      * @param listener    位置刷新的回调接口
      * @return {@code true}: 初始化成功<br>{@code false}: 初始化失败
      */
-    @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     public static boolean register(Context context, long minTime, long minDistance, OnLocationChangeListener listener) {
         if (listener == null) return false;
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -107,11 +106,9 @@ public class LocationUtils {
         return true;
     }
 
-
     /**
      * 注销
      */
-    @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     public static void unregister() {
         if (mLocationManager != null) {
             if (myLocationListener != null) {

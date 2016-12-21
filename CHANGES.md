@@ -1,4 +1,7 @@
 # BaseLibrary Releases
+### December 19th 2016
+Util 1.3.3
+* Fix:LocationUtils,NetworkUtils;
 
 ### December 19th 2016
 Common 1.1.2
