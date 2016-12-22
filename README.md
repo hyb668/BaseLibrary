@@ -1,6 +1,6 @@
 # BaseLibrary: Base Library for Android
 
-Android基本库，现在分为common、util和ui,主要包含`adapter`、`base`、`event`、`listener`，`logger`，`util`，`widget`，这个基本库集合了一般Android项目所需的公共类，可直接导入使用，加快项目开发。
+Android基本库，现在分为common、util和ui,主要包含`adapter`、`base`、`zxing`、`listener`，`logger`，`util`，`widget`，这个基本库集合了一般Android项目所需的公共类，可直接导入使用，加快项目开发。
 
 ## Communication
 
@@ -39,7 +39,7 @@ $ ./gradlew build
 
 project中有样例演示，可以在 `sample/` 文件夹找到.
 
-点击[下载运行APK](https://github.com/GosuncnMobile/BaseLibrary/raw/master/baselibrary_sample_v1.0_2016-12-16_alpha.apk)
+点击[下载运行APK](https://github.com/GosuncnMobile/BaseLibrary/raw/master/baselibrary_sample_v1.0_2016-12-22_alpha.apk)
 
 ## Util
 

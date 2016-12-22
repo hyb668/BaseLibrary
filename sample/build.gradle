@@ -16,7 +16,7 @@ android {
 
     sourceSets {
         main {
-            res.srcDirs += ['src/main/res-ui','src/main/res-util']
+            res.srcDirs += ['src/main/res-ui','src/main/res-util','src/main/res-common']
         }
     }
 

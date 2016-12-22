@@ -42,6 +42,7 @@ install.repositories.mavenInstaller.pom.project {
 if (project.plugins.hasPlugin('com.android.library')) {
     android.libraryVariants.all { variant ->
         Task javadocTask = task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
+            failOnError = false
             group = 'artifact'
             description "Generates Javadoc for $variant.name"
 

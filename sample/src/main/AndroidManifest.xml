@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gosuncn.sample">
+          package="com.gosuncn.sample">
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".common.SampleApplication"
@@ -12,82 +15,92 @@
         <!-- Main  start -->
         <activity android:name=".module.main.activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".module.main.activity.UIActivity"
-            android:label="@string/ui" />
+            android:label="@string/ui"/>
+        <activity
+            android:name=".module.main.activity.CommonActivity"
+            android:label="@string/common"/>
         <activity
             android:name=".module.main.activity.UtilActivity"
-            android:label="@string/util" />
+            android:label="@string/util"/>
         <!-- Main  end -->
 
 
         <!-- UI  start -->
         <activity
             android:name=".module.ui.activity.WidgetActivity"
-            android:label="@string/widget" />
+            android:label="@string/widget"/>
         <activity
             android:name=".module.ui.activity.ViewActivity"
-            android:label="@string/view" />
+            android:label="@string/view"/>
 
         <!-- Widget  start -->
         <activity
             android:name=".module.ui.activity.CircleImageViewActivity"
-            android:label="@string/circle_image_view" />
+            android:label="@string/circle_image_view"/>
         <activity
             android:name=".module.ui.activity.ToolbarExtendActivity"
-            android:label="@string/custom_toolbar" />
+            android:label="@string/custom_toolbar"/>
         <activity
             android:name=".module.ui.activity.RecyclerViewDividerActivity"
-            android:label="@string/recycler_view_divider" />
+            android:label="@string/recycler_view_divider"/>
         <activity
             android:name=".module.ui.activity.RecyclerViewGridSpaceActivity"
-            android:label="@string/recycler_view_grid_space" />
+            android:label="@string/recycler_view_grid_space"/>
         <activity
             android:name=".module.ui.activity.RecyclerViewLinearSpaceActivity"
-            android:label="@string/recycler_view_linear_space" />
+            android:label="@string/recycler_view_linear_space"/>
         <activity
             android:name=".module.ui.activity.ResizeDrawableCheckBoxActivity"
-            android:label="@string/resize_drawable_checkbox" />
+            android:label="@string/resize_drawable_checkbox"/>
         <activity
             android:name=".module.ui.activity.EditTextExtendActivity"
-            android:label="@string/edit_text_extend" />
+            android:label="@string/edit_text_extend"/>
         <!-- Widget end -->
 
 
         <!-- View start -->
         <activity
             android:name=".module.ui.activity.BlurFrameLayoutActivity"
-            android:label="@string/blur_frame_layout" />
+            android:label="@string/blur_frame_layout"/>
         <activity
             android:name=".module.ui.activity.DisableScrollViewPagerActivity"
-            android:label="@string/disable_scroll_viewpager" />
+            android:label="@string/disable_scroll_viewpager"/>
         <activity
             android:name=".module.ui.activity.SquareLayoutActivity"
-            android:label="@string/square_layout" />
+            android:label="@string/square_layout"/>
         <!-- View end -->
 
 
         <!-- UI  end -->
 
+        <!-- Common  start -->
+            <activity
+                android:name=".module.common.activity.ZXingActivity"
+                android:label="@string/zxing"/>
+        <!-- Common  end -->
+
 
         <!-- Util  start -->
         <activity
             android:name=".module.util.activity.AppActivity"
-            android:label="@string/m_app" />
+            android:label="@string/m_app"/>
         <activity
             android:name=".module.util.activity.FunctionActivity"
-            android:label="@string/function" />
+            android:label="@string/function"/>
 
         <!-- App  start -->
         <activity
             android:name=".module.util.activity.ActivityUtilsActivity"
             android:label="@string/activity_utils"/>
         <!-- App  end -->
+
 
         <!-- Function  start -->
         <activity

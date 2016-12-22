@@ -22,6 +22,9 @@ public class MainActivity extends AnActivity {
                 case 0:
                     gotoActivity(UIActivity.class);
                     break;
+                case 1:
+                    gotoActivity(CommonActivity.class);
+                    break;
                 case 2:
                     gotoActivity(UtilActivity.class);
                     break;

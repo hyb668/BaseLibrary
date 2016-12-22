@@ -12,4 +12,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<manifest package="com.gosuncn.core.common"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gosuncn.core.common">
+
+    <!--使用ZXing需要添加以下权限
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    -->
+
+    <application>
+        <activity
+            android:name=".zxing.activity.CaptureActivity"
+            android:label="@string/qr_code"/>
+    </application>
+
+</manifest>
