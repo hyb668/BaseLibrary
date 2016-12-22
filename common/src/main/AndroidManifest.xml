@@ -23,7 +23,8 @@
     <application>
         <activity
             android:name=".zxing.activity.CaptureActivity"
-            android:label="@string/qr_code"/>
+            android:label="@string/qr_code"
+            android:theme="@style/Theme.AppCompat"/>
     </application>
 
 </manifest>

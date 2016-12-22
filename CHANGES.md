@@ -1,7 +1,7 @@
 # BaseLibrary Releases
 
 ### December 22nd 2016
-Common 1.2.2
+Common 1.2.3
 * Add:ZXing;
 
 ### December 19th 2016
