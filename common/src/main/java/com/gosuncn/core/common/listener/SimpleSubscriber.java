@@ -13,7 +13,6 @@
  */
 package com.gosuncn.core.common.listener;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -26,9 +25,9 @@ import rx.Subscriber;
  */
 public abstract class SimpleSubscriber<T> extends Subscriber<T> {
 
-    private Activity context;
+    private Context context;
 
-    public SimpleSubscriber(Activity context) {
+    public SimpleSubscriber(Context context) {
         this.context = context;
     }
 

@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'// 应用Android plugin
 def cfg = rootProject.ext.configuration
 def lib = rootProject.ext.libraries
 
-version = '1.2.4'
+version = '1.2.5'
 
 android {
     compileSdkVersion cfg.compileSdkVersion
@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdkVersion cfg.minSdkVersion
         targetSdkVersion cfg.targetSdkVersion
-        versionCode 7
+        versionCode 8
         versionName project.version
     }
     compileOptions {
@@ -32,7 +32,7 @@ dependencies {
     compile "com.github.bumptech.glide:glide:${lib.glide}"
     //rxJava
     compile "io.reactivex:rxjava:${lib.rxJava}"
-
+    //zxing
     compile files('libs/zxing.jar')
 }
 
