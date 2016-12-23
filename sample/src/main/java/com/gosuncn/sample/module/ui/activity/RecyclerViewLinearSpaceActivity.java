@@ -32,7 +32,7 @@ public class RecyclerViewLinearSpaceActivity extends AppCompatActivity {
 
     protected void initViews() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        createData(40);
+        createData(10);
         //设置RecyclerView布局
         rv.setHasFixedSize(true);//优化布局性能
         layoutManager = new LinearLayoutManager(rv.getContext());

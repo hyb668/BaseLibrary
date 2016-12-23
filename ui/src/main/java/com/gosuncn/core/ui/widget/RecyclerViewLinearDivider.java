@@ -103,8 +103,8 @@ public class RecyclerViewLinearDivider extends RecyclerView.ItemDecoration {
         int top = child.getBottom() + params.bottomMargin + getDividerHeight();
         int bottom = top + getDividerHeight();
 
-        final int parentBottom = parent.getHeight() - parent.getPaddingBottom();
-        while (bottom < parentBottom) {
+        final int childCount = parent.getChildCount();
+        for (int i = 0; i < childCount; i++) {
             mDivider.setBounds(left, top, right, bottom);
             mDivider.draw(c);
 
@@ -131,6 +131,8 @@ public class RecyclerViewLinearDivider extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        int childCount = parent.getAdapter().getItemCount();
+        if(parent.getChildAdapterPosition(view)>=childCount) return;
         if (mOrientation == VERTICAL_LIST) {
             outRect.set(0, 0, 0, getDividerHeight());
         } else if (mOrientation == HORIZONTAL_LIST) {
