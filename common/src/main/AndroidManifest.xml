@@ -23,7 +23,7 @@
     <application>
         <activity
             android:name=".zxing.activity.CaptureActivity"
-            android:label="@string/qr_code"
+            android:label="@string/com_gosuncn_core_common_qr_code"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:screenOrientation="portrait"/>
     </application>

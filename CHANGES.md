@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### December 26th 2016
+Common 1.2.6
+* Fix:ZXing;
+
 ### December 23rd 2016
 Common 1.2.5
 * Fix:SimSubscriber;

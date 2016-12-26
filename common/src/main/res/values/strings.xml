@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">common</string>
-    <string name="qr_code">二维码/条码</string>
+    <string name="com_gosuncn_core_common_qr_code">二维码/条码</string>
 </resources>
