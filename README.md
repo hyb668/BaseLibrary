@@ -39,7 +39,7 @@ $ ./gradlew build
 
 project中有样例演示，可以在 `sample/` 文件夹找到.
 
-点击[下载运行APK](https://github.com/GosuncnMobile/BaseLibrary/raw/master/baselibrary_sample_v1.0_2016-12-23_alpha.apk)
+点击[下载运行APK](https://github.com/GosuncnMobile/BaseLibrary/raw/master/baselibrary_sample_v1.0_2016-12-27_alpha.apk)
 
 ## Util
 
