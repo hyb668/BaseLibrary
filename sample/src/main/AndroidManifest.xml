@@ -2,8 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.gosuncn.sample">
 
+    <!--ZXing权限-->
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <!--locationUtils权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name=".common.SampleApplication"
@@ -106,6 +109,9 @@
         <activity
             android:name=".module.util.activity.HandlerActivity"
             android:label="@string/handler"/>
+        <activity
+            android:name=".module.util.activity.LocationUtilsActivity"
+            android:label="@string/location_utils"/>
 
         <!-- Function  end -->
 

@@ -42,7 +42,10 @@
 
     <!-- App -->
     <string name="activity_utils">ActivityUtils</string>
+
+    <!-- Function -->
     <string name="handler">Handler</string>
+    <string name="location_utils">LocationUtils</string>
 
     <!--util页面 end-->
 

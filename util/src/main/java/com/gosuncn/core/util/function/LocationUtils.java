@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,7 +13,6 @@
  */
 package com.gosuncn.core.util.function;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -25,7 +24,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.RequiresPermission;
+import android.widget.Toast;
 
 import com.gosuncn.core.util.view.ToastUtils;
 
@@ -34,13 +33,14 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- *  定位相关工具类
+ * 定位相关工具类
+ * PS:不建议使用系统自带定位，灰常不准确
  */
 public class LocationUtils {
 
     private static OnLocationChangeListener mListener;
-    private static MyLocationListener       myLocationListener;
-    private static LocationManager          mLocationManager;
+    private static MyLocationListener myLocationListener;
+    private static LocationManager mLocationManager;
 
     private LocationUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
@@ -90,6 +90,7 @@ public class LocationUtils {
      * @param listener    位置刷新的回调接口
      * @return {@code true}: 初始化成功<br>{@code false}: 初始化失败
      */
+    @Deprecated
     public static boolean register(Context context, long minTime, long minDistance, OnLocationChangeListener listener) {
         if (listener == null) return false;
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -98,17 +99,21 @@ public class LocationUtils {
             ToastUtils.showShortToastSafe(context, "无法定位，请打开定位服务");
             return false;
         }
-        String provider = mLocationManager.getBestProvider(getCriteria(), true);
-        Location location = mLocationManager.getLastKnownLocation(provider);
-        if (location != null) listener.getLastKnownLocation(location);
-        if (myLocationListener == null) myLocationListener = new MyLocationListener();
-        mLocationManager.requestLocationUpdates(provider, minTime, minDistance, myLocationListener);
-        return true;
+        String provider = getBestProvider(context);
+        if (provider != null) {
+            Location location = mLocationManager.getLastKnownLocation(provider);
+            if (location != null) listener.getLastKnownLocation(location);
+            if (myLocationListener == null) myLocationListener = new MyLocationListener();
+            mLocationManager.requestLocationUpdates(provider, minTime, minDistance, myLocationListener);
+            return true;
+        }
+        return false;
     }
 
     /**
      * 注销
      */
+    @Deprecated
     public static void unregister() {
         if (mLocationManager != null) {
             if (myLocationListener != null) {
@@ -117,6 +122,28 @@ public class LocationUtils {
             }
             mLocationManager = null;
         }
+    }
+
+    private static String getBestProvider(Context context) {
+        List<String> providers = mLocationManager.getProviders(true);
+        if (providers.contains(LocationManager.GPS_PROVIDER) && accessedProvider(LocationManager.GPS_PROVIDER)) {
+            return LocationManager.GPS_PROVIDER;
+        } else if (providers.contains(LocationManager.NETWORK_PROVIDER) && accessedProvider(LocationManager.NETWORK_PROVIDER)) {
+            return LocationManager.NETWORK_PROVIDER;
+        } else if (providers.contains(LocationManager.PASSIVE_PROVIDER) && accessedProvider(LocationManager.PASSIVE_PROVIDER)) {
+            return LocationManager.PASSIVE_PROVIDER;
+        } else {
+            Toast.makeText(context, "请打开网络进行定位", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+    }
+
+    private static boolean accessedProvider(String provider) {
+        Location location = mLocationManager.getLastKnownLocation(provider);
+        if (location != null) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -149,6 +176,7 @@ public class LocationUtils {
      * @param longitude 经度
      * @return {@link Address}
      */
+    @Deprecated
     public static Address getAddress(Context context, double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
@@ -181,6 +209,7 @@ public class LocationUtils {
      * @param longitude 经度
      * @return 所在地
      */
+    @Deprecated
     public static String getLocality(Context context, double latitude, double longitude) {
         Address address = getAddress(context, latitude, longitude);
         return address == null ? "unknown" : address.getLocality();
@@ -194,6 +223,7 @@ public class LocationUtils {
      * @param longitude 经度
      * @return 所在街道
      */
+    @Deprecated
     public static String getStreet(Context context, double latitude, double longitude) {
         Address address = getAddress(context, latitude, longitude);
         return address == null ? "unknown" : address.getAddressLine(0);

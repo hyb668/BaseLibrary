@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### December 27th 2016
+Util 1.3.4
+* Fix:LocationUtils;
+
 ### December 26th 2016
 Common 1.2.6
 * Fix:ZXing;

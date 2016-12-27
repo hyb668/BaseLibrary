@@ -8,7 +8,9 @@ import com.gosuncn.sample.module.main.adapter.AnAdapter;
 public class FunctionActivity extends AnActivity {
 
     private final String HANDLER = SampleApplication.getAppContext().getResources().getString(R.string.handler);
-    private String[] itemTitle = new String[]{HANDLER};
+    private final String LOCATION_UTILS =
+            SampleApplication.getAppContext().getResources().getString(R.string.location_utils);
+    private String[] itemTitle = new String[]{HANDLER,LOCATION_UTILS};
 
     @Override
     protected void initViews() {
@@ -21,6 +23,9 @@ public class FunctionActivity extends AnActivity {
             switch (position){
                 case 0:
                     gotoActivity(HandlerActivity.class);
+                    break;
+                case 1:
+                    gotoActivity(LocationUtilsActivity.class);
                     break;
             }
         });

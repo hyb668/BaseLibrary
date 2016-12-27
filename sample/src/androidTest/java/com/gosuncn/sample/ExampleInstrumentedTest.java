@@ -35,7 +35,7 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
         //assertTrue(AppUtils.isInstallByread(appContext.getPackageName()));
         new PreferencesHelper(appContext,"sp_name").saveOrUpdate("123","123");
-        assertTrue(CleanCacheUtils.cleanSharedPreference(appContext));
+        assertTrue(CleanCacheUtils.cleanInternalSP(appContext));
     }
 
 }
