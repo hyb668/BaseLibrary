@@ -29,6 +29,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -1308,6 +1309,38 @@ public class BitmapUtils {
         }
     }
 
+    private static int calculateSampleSize(BitmapFactory.Options options,int reqWidth,int reqHeight){
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if(height > reqHeight || width > reqWidth){
+            final int heightRatio = Math.round((float) height/(float) reqHeight);
+            final int widthRatio = Math.round((float) width/(float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
+    }
 
+    public static Bitmap getBitmap(String path,int reqWidth,int reqHeight){
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path,options);
+        options.inSampleSize = calculateSampleSize(options,reqWidth,reqHeight);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(path,options);
+    }
+
+    public static Bitmap compressBitmap(String path,int width,int height,int quality){
+        Bitmap bitmap = getBitmap(path,width,height);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,quality,baos);
+        return bytes2Bitmap(baos.toByteArray());
+    }
+
+    public static String bitmap2String(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        return Base64.encodeToString(baos.toByteArray(),Base64.DEFAULT);
+    }
 
 }

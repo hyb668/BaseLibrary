@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### December 30th 2016
+Util 1.3.5
+* Update:IntentUtils,BitmapUtils;
+
 ### December 29th 2016
 Common 1.2.7
 * Fix:SimpleSubscriber;

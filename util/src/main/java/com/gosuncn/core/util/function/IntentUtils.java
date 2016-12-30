@@ -200,4 +200,16 @@ public class IntentUtils {
         return intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
+    /**
+     * 获取图片的意图
+     *
+     * @param uri
+     * @return intent
+     */
+    public static Intent getImageIntent(Uri uri){
+        Intent intent = new Intent(Intent.ACTION_PICK,uri);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
+        return intent;
+    }
+
 }
