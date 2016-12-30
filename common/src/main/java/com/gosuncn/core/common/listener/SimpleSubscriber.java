@@ -25,7 +25,7 @@ import rx.Subscriber;
  */
 public abstract class SimpleSubscriber<T> extends Subscriber<T> {
 
-    private Context context;
+    protected Context context;
 
     public SimpleSubscriber(Context context) {
         this.context = context;

@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### December 29th 2016
+Common 1.2.7
+* Fix:SimpleSubscriber;
+
 ### December 27th 2016
 Util 1.3.4
 * Fix:LocationUtils;
@@ -23,7 +27,6 @@ Common 1.2.4
 Util 1.3.3
 * Fix:LocationUtils,NetworkUtils;
 
-### December 19th 2016
 Common 1.1.2
 * Fix:UrlInterceptor;
 
