@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
+
+import java.net.SocketTimeoutException;
 
 import rx.Subscriber;
 
@@ -33,7 +35,7 @@ public abstract class SimpleSubscriber<T> extends Subscriber<T> {
 
     public abstract void onSuccess(T t);
 
-    public void onFailure(Throwable e){
+    public void onFailure(Throwable e) {
         e.printStackTrace();
     }
 
@@ -54,7 +56,14 @@ public abstract class SimpleSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
+        if (e instanceof SocketTimeoutException) {
+            onTimeout((SocketTimeoutException) e);
+        }
         onFailure(e);
+    }
+
+    public void onTimeout(SocketTimeoutException e){
+
     }
 
     @Override
