@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'// 应用Android plugin
 def cfg = rootProject.ext.configuration
 def lib = rootProject.ext.libraries
 
-version = '1.2.8'
+version = '1.2.9'
 
 android {
     compileSdkVersion cfg.compileSdkVersion
@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdkVersion cfg.minSdkVersion
         targetSdkVersion cfg.targetSdkVersion
-        versionCode 11
+        versionCode 12
         versionName project.version
     }
     compileOptions {

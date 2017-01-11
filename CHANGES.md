@@ -1,5 +1,9 @@
 # BaseLibrary Releases
 
+### January 11st 2017
+Common 1.2.9
+* Update:ZXing;
+
 ### January 4th 2017
 Common 1.2.8
 * Update:SimpleSubscriber;

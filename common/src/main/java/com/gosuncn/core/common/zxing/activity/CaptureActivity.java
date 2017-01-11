@@ -18,6 +18,7 @@ package com.gosuncn.core.common.zxing.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,7 +54,7 @@ import java.lang.reflect.Field;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public final class CaptureActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public class CaptureActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
 
@@ -84,15 +85,14 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
 
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_capture);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initViews();
 
         scanPreview = (SurfaceView) findViewById(R.id.capture_preview);
         scanContainer = (RelativeLayout) findViewById(R.id.capture_container);
         scanCropView = (RelativeLayout) findViewById(R.id.capture_crop_view);
         scanLine = (ImageView) findViewById(R.id.capture_scan_line);
-
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
 
@@ -104,6 +104,15 @@ public final class CaptureActivity extends AppCompatActivity implements SurfaceH
         animation.setRepeatMode(Animation.RESTART);
         scanLine.startAnimation(animation);
     }
+
+    public void initViews(){
+
+        setContentView(R.layout.activity_capture);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
